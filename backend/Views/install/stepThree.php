@@ -17,7 +17,7 @@
 <body>
 
 <p id="logo"><a href="https://www.lion-u.com/"></a></p>
-<form method="post" action="/static/" name="config">
+<form method="get" action="/static/index.html" name="config">
 	<p class="step">量U广告归因——用数据挖掘您的广告价值</p>
 	<p class="step">安装进度</p>
 	<ul id="install-process"></ul>
