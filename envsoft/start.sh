@@ -203,20 +203,20 @@ then
 fi
 mkdir /tmp/rdkafka
 
-if [ ! -f  /tmp/rdkafka-4.1.2.tgz ]
+if [ ! -f  /tmp/rdkafka-6.0.3.tgz ]
 then
-	cp ${currdir}/rdkafka-4.1.2.tgz /tmp/rdkafka-4.1.2.tgz
+	cp ${currdir}/rdkafka-6.0.3.tgz /tmp/rdkafka-6.0.3.tgz
 fi
 
 if [ -d /tmp/rdkafka ]
 then
-	tar -zxvf  /tmp/rdkafka-4.1.2.tgz -C /tmp/rdkafka
+	tar -zxvf  /tmp/rdkafka-6.0.3.tgz -C /tmp/rdkafka
 else
 	echo "/tmp/rdkafka文件夹不存在"
 	exit 1
 fi
 
-cd /tmp/rdkafka/rdkafka-4.1.2
+cd /tmp/rdkafka/rdkafka-6.0.3
 phpize=`which phpize`
 ${phpize}
 with_php_config=`which php-config`
