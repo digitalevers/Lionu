@@ -353,14 +353,14 @@ exit 3
 fi
 
 ##配置密钥并追加公钥以便 Spark 免密启动
-if [ ! -f ~/.ssh/id_rsa.spark.lionsu ]
+if [ ! -f ~/.ssh/id_rsa.spark.lionu ]
 then
-	ssh-keygen -t rsa -f ~/.ssh/id_rsa.spark.lionsu -q -N ''
-	if [ -f ~/.ssh/id_rsa.spark.lionsu.pub ]
+	ssh-keygen -t rsa -f ~/.ssh/id_rsa.spark.lionu -q -N ''
+	if [ -f ~/.ssh/id_rsa.spark.lionu.pub ]
 	then 
-		cat ~/.ssh/id_rsa.spark.lionsu.pub >> ~/.ssh/authorized_keys
+		cat ~/.ssh/id_rsa.spark.lionu.pub >> ~/.ssh/authorized_keys
 		##追加config配置文件 如果config文件不存在 会自动新建
-		echo -e "\nHost localhost\nIdentityFile ~/.ssh/id_rsa.spark.lionsu\nUser root\n"	>> ~/.ssh/config
+		echo -e "\nHost localhost\nIdentityFile ~/.ssh/id_rsa.spark.lionu\nUser root\n"	>> ~/.ssh/config
 	else
 		echo '公钥文件不存在'
 		exit 11
@@ -372,6 +372,6 @@ fi
 
 ./spark-2.4.7-bin-hadoop2.7/sbin/start-all.sh
 #提交作业
-#./bin/spark-submit --master spark://127.0.0.1:7077 --class sparkSteamReConsitution ../lionsu-stream.jar
+#./bin/spark-submit --master spark://127.0.0.1:7077 --class sparkSteamReConsitution ../lionu-stream.jar
 
 
