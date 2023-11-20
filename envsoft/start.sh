@@ -119,9 +119,9 @@ then
 	then
 		apt -y install make
 	fi
-	if [ `dpkg -l | grep gcc-c++ | wc -l` -eq 0 ]
+	if [ `dpkg -l | grep g++ | wc -l` -eq 0 ]
 	then
-		apt -y install gcc-c++
+		apt -y install g++
 	fi
 	if [ `dpkg -l | grep php-dev | wc -l` -eq 0 ]
 	then
