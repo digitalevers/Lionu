@@ -203,11 +203,12 @@ class Receive extends BaseController
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
 		unset($deviceLaunchData['deviceInfo']);
 		$deviceLaunchData = array_merge($deviceLaunchData,$deviceInfo);
-	    //print_r($deviceLaunchData);
+	    
 	    $conf = new \RdKafka\Conf();
 	    
 	    //TopicConf
 	    $topicConf = new \RdKafka\TopicConf();
+	    
 	    //-1必须等所有brokers同步完成的确认 1当前服务器确认 0不确认，这里如果是0回调里的offset无返回，如果是1和-1会返回offset
 	    // 我们可以利用该机制做消息生产的确认，不过还不是100%，因为有可能会中途kafka服务器挂掉
 	    $topicConf->set('request.required.acks', 0);
@@ -217,13 +218,14 @@ class Receive extends BaseController
 	    $rk->addBrokers('127.0.0.1:9092');
 	    $topic = $rk->newTopic('launch', $topicConf);
 	    //echo json_encode($deviceLaunchData);
-	    $topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($deviceLaunchData));
-	    
+	    $produceResult = $topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($deviceLaunchData));
+	    //var_dump($produceResult);
 	    $len = $rk->getOutQLen();
 	    while ($len > 0) {
 	        $len = $rk->getOutQLen();
 	        $rk->poll(10);
 	    }
+
 	    _json(array('code'=>200,'msg'=>'ok'),1);
 	    
 	    /* $deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
