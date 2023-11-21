@@ -49,9 +49,9 @@ class Sysin extends NeedloginController
                 }
             }
             
-            $source_file = $_SERVER["DOCUMENT_ROOT"].'/download_sdk/LionsU_Android.aar';
+            $source_file = $_SERVER["DOCUMENT_ROOT"].'/download_sdk/LionU_Android.aar';
             if(file_exists($source_file)){
-                $dest_file = '/tmp/LionsU_Android_'.$app_id.'.aar';
+                $dest_file = '/tmp/LionU_Android_'.$app_id.'.aar';
                 $cp_result = copy($source_file,$dest_file);
                 $zip = new \ZipArchive;
                 if ($zip->open($dest_file) === TRUE) {
@@ -83,7 +83,7 @@ class Sysin extends NeedloginController
             }
         } elseif($app['app_os'] == 2) {
             //iOS
-            header('Location:/download_sdk/LionsU_iOS.rar');
+            header('Location:/download_sdk/LionU_iOS.rar');
             exit; //一定要加这行才会进行跳转
         }
     }
