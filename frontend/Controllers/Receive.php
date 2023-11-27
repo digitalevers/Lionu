@@ -199,7 +199,9 @@ class Receive extends BaseController
 	public function launch(){
 	    //$deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceLaunchData = $this->request->getJSON(true);
+	    file_put_contents('./json.txt', json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
+	     //TODO 服务端获取ip
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
 		unset($deviceLaunchData['deviceInfo']);
 		$deviceLaunchData = array_merge($deviceLaunchData,$deviceInfo);
