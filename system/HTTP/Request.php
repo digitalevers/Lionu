@@ -361,8 +361,7 @@ class Request extends Message implements RequestInterface
 		// Null filters cause null values to return.
 		if (is_null($filter))
 		{
-			//$filter = FILTER_DEFAULT;
-		    $filter = ENT_NOQUOTES;//2023-11-18
+			$filter = FILTER_DEFAULT;
 		}
 
 		// Return all values when $index is null
@@ -371,12 +370,14 @@ class Request extends Message implements RequestInterface
 			$values = [];
 			foreach ($this->globals[$method] as $key => $value)
 			{
-			    $values[$key] = is_array($value) ? $this->fetchGlobal($method, $key, $filter, $flags) : $this->_filter_with_phpversion($value, $filter, $flags);
+			    $values[$key] = is_array($value) 
+			    ? $this->fetchGlobal($method, $key, $filter, $flags) 
+			    : $this->_filter_with_phpversion($value, $filter, $flags);
 			}
 
 			return $values;
 		}
-
+		
 		// allow fetching multiple keys at once
 		if (is_array($index))
 		{
@@ -413,12 +414,12 @@ class Request extends Message implements RequestInterface
 				}
 			}
 		}
-
+	
 		if (! isset($value))
 		{
 			$value = $this->globals[$method][$index] ?? null;
 		}
-
+		
 		if (is_array($value) && ($filter !== null || $flags !== null))
 		{
 			// Iterate over array and append filter and flags
@@ -494,7 +495,7 @@ class Request extends Message implements RequestInterface
 	        default:
 	            break;
 	    }
-        
+	    
 	    return filter_var($value, $filter, $flags);
 	}
 }
