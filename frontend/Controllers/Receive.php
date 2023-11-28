@@ -199,7 +199,7 @@ class Receive extends BaseController
 	public function launch(){
 	    //$deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceLaunchData = $this->request->getJSON(true);
-	    file_put_contents('./json.txt', json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
+	    file_put_contents('./json.txt', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
 	     //TODO 服务端获取ip
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
@@ -263,6 +263,7 @@ class Receive extends BaseController
 	public function reg(){
 	    //$deviceRegData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceRegData = $this->request->getJSON(true);
+	    file_put_contents('./json.txt', 'receive/reg-'.json_encode($deviceRegData)."\r\n",FILE_APPEND);
 	//转为一维数组
 		$deviceInfo = $deviceRegData['deviceInfo'];
 		unset($deviceRegData['deviceInfo']);
@@ -296,6 +297,7 @@ class Receive extends BaseController
 	public function pay(){
 	    //$devicePayData = $this->request->getVar(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $devicePayData = $this->request->getJSON(true);
+	    file_put_contents('./json.txt', 'receive/pay-'.json_encode($devicePayData)."\r\n",FILE_APPEND);
 			//转为一维数组
 		$deviceInfo = $devicePayData['deviceInfo'];
 		unset($devicePayData['deviceInfo']);
