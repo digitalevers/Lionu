@@ -199,12 +199,12 @@ class Receive extends BaseController
 	public function launch(){
 	    //$deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceLaunchData = $this->request->getJSON(true);
-	    $platform = $this->getPlatform($deviceLaunchData['os']);
+	    //$platform = $this->getPlatform($deviceLaunchData['os']);
 	    file_put_contents('./json.txt', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
 	     //TODO 服务端获取ip
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
-		$deviceInfo['api'] = 'launch';
+		//$deviceInfo['action'] = 'launch';
 		unset($deviceLaunchData['deviceInfo']);
 		$deviceLaunchData = array_merge($deviceLaunchData,$deviceInfo);
 	    
@@ -220,7 +220,7 @@ class Receive extends BaseController
 	    $rk = new \RdKafka\Producer($conf);
 	    $rk->setLogLevel(LOG_DEBUG);
 	    $rk->addBrokers('127.0.0.1:9092');
-	    $topic = $rk->newTopic($platform, $topicConf);
+	    $topic = $rk->newTopic('launch', $topicConf);
 	    //echo json_encode($deviceLaunchData);
 	    $produceResult = $topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($deviceLaunchData));
 	    //var_dump($produceResult);
@@ -265,11 +265,11 @@ class Receive extends BaseController
 	public function reg(){
 	    //$deviceRegData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceRegData = $this->request->getJSON(true);
-	    $platform = $this->getPlatform($deviceLaunchData['os']);
+	    //$platform = $this->getPlatform($deviceRegData['os']);
 	    file_put_contents('./json.txt', 'receive/reg-'.json_encode($deviceRegData)."\r\n",FILE_APPEND);
-	//转为一维数组
+	    //转为一维数组
 		$deviceInfo = $deviceRegData['deviceInfo'];
-		$deviceInfo['api'] = 'reg';
+		//$deviceInfo['action'] = 'reg';
 		unset($deviceRegData['deviceInfo']);
 		$deviceRegData = array_merge($deviceRegData,$deviceInfo);
 	    $conf = new \RdKafka\Conf();
@@ -283,7 +283,7 @@ class Receive extends BaseController
 	    $rk = new \RdKafka\Producer($conf);
 	    $rk->setLogLevel(LOG_DEBUG);
 	    $rk->addBrokers('127.0.0.1:9092');
-	    $topic = $rk->newTopic($platform, $topicConf);
+	    $topic = $rk->newTopic('reg', $topicConf);
 	    
 	    $topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($deviceRegData));
 	    
@@ -301,11 +301,11 @@ class Receive extends BaseController
 	public function pay(){
 	    //$devicePayData = $this->request->getVar(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $devicePayData = $this->request->getJSON(true);
-	    $platform = $this->getPlatform($deviceLaunchData['os']);
+	    //$platform = $this->getPlatform($devicePayData['os']);
 	    file_put_contents('./json.txt', 'receive/pay-'.json_encode($devicePayData)."\r\n",FILE_APPEND);
 		//转为一维数组
 		$deviceInfo = $devicePayData['deviceInfo'];
-		$deviceInfo['api'] = 'pay';
+		//$deviceInfo['action'] = 'pay';
 		unset($devicePayData['deviceInfo']);
 		$devicePayData = array_merge($devicePayData,$deviceInfo);
 	    $conf = new \RdKafka\Conf();
@@ -319,7 +319,7 @@ class Receive extends BaseController
 	    $rk = new \RdKafka\Producer($conf);
 	    $rk->setLogLevel(LOG_DEBUG);
 	    $rk->addBrokers('127.0.0.1:9092');
-	    $topic = $rk->newTopic($platform, $topicConf);
+	    $topic = $rk->newTopic('pay', $topicConf);
 	    
 	    $topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($devicePayData));
 	    
