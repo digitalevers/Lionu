@@ -202,9 +202,9 @@ class Receive extends BaseController
 	    //$platform = $this->getPlatform($deviceLaunchData['os']);
 	    file_put_contents('./json.txt', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
-	     //TODO 服务端获取ip
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
 		//$deviceInfo['action'] = 'launch';
+		$deviceInfo['externalip'] = $this->getExternalIP();
 		unset($deviceLaunchData['deviceInfo']);
 		$deviceLaunchData = array_merge($deviceLaunchData,$deviceInfo);
 	    
@@ -270,6 +270,7 @@ class Receive extends BaseController
 	    //转为一维数组
 		$deviceInfo = $deviceRegData['deviceInfo'];
 		//$deviceInfo['action'] = 'reg';
+		$deviceInfo['externalip'] = $this->getExternalIP();
 		unset($deviceRegData['deviceInfo']);
 		$deviceRegData = array_merge($deviceRegData,$deviceInfo);
 	    $conf = new \RdKafka\Conf();
@@ -306,6 +307,7 @@ class Receive extends BaseController
 		//转为一维数组
 		$deviceInfo = $devicePayData['deviceInfo'];
 		//$deviceInfo['action'] = 'pay';
+		$deviceInfo['externalip'] = $this->getExternalIP();
 		unset($devicePayData['deviceInfo']);
 		$devicePayData = array_merge($devicePayData,$deviceInfo);
 	    $conf = new \RdKafka\Conf();
@@ -338,5 +340,40 @@ class Receive extends BaseController
 	        case 2:
 	            return 'ios';
 	    }
+	}
+	
+	/**
+	 * 获取客户端 ip
+	 * @param number $type
+	 * @return string|number|unknown
+	 */
+	private function getExternalIP($type = 0){
+        $ip = '0.0.0.0';
+        
+        if (isset($_SERVER['HTTP_X_REAL_IP'])) {
+            //nginx 代理模式下，获取客户端真实IP
+            $ip = $_SERVER['HTTP_X_REAL_IP'];
+        } elseif (isset($_SERVER['HTTP_CLIENT_IP'])) {
+            //客户端的ip
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            //浏览当前页面的用户计算机的网关
+            $arr = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $pos = array_search('unknown', $arr);
+            if (false !== $pos) {
+                unset($arr[$pos]);
+            }
+            $ip = trim($arr[0]);
+        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
+            //浏览当前页面的用户计算机的ip地址
+            $ip = $_SERVER['REMOTE_ADDR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        // IP地址合法验证
+        $long = sprintf("%u", ip2long($ip));
+        $ip   = $long ? array($ip, $long) : array('0.0.0.0', 0);
+        
+        return $ip[$type];
 	}
 }
