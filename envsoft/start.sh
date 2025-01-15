@@ -42,12 +42,12 @@ elif [ ${pkg} == "apt" ]
 then
 	if [ `dpkg -l | grep apache2 | wc -l` -eq 0 ] && [ `dpkg -l | grep nginx | wc -l` -eq 0 ]
 	then
-		echo "还未安装任何 Web Server,请先安装 Apache 或者 Nginx"
-		exit 1
+		echo "还未安装任何 Web Server, 系统默认自动安装 Nginx"
+		${pkg} -y install nginx
 	elif [ `dpkg -l | grep php | wc -l` -eq 0 ]
 	then
-		echo "还未安装 PHP,请先安装 PHP"
-		exit 1
+		echo "还未安装 PHP, 系统自动安装 PHP"
+		${pkg} -y install php
 	fi
 elif [ ${pkg} == "zypper" ]
 then
@@ -134,6 +134,14 @@ then
 	if [ `dpkg -l | grep  default-jdk | wc -l` -eq 0 ]
 	then
 		apt -y install default-jdk
+	fi
+	if [ `dpkg -l | grep  openssh-server | wc -l` -eq 0 ]
+	then
+		apt -y install openssh-server
+	fi
+	if [ `dpkg -l | grep  netstat | wc -l` -eq 0 ]
+	then
+		apt -y install net-tools
 	fi
 elif [ ${pkg} == "zypper" ]
 then
@@ -272,7 +280,10 @@ then
 	then
 		service php${php_version}-fpm restart
 	fi
-	if service --status-all | grep 'apache2'
+	if service --status-all | grep 'nginx'
+	then
+		service nginx restart
+	elif service --status-all | grep 'apache2'
 	then
 		service apache2 restart
 	fi
@@ -313,6 +324,10 @@ then
 	if service --status-all | grep php-fpm
 	then
 		service php-fpm restart
+	fi
+	if service --status-all | grep 'nginx'
+	then
+		service nginx restart
 	fi
 	if service --status-all | grep 'apache2'
 	then
@@ -374,4 +389,4 @@ fi
 #提交作业
 #./bin/spark-submit --master spark://127.0.0.1:7077 --class sparkSteamReConsitution ../lionu-stream.jar
 
-
+echo '环境初始化成功'
