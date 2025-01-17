@@ -78,6 +78,6 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 
 defined('REQUIRED_PHP_VERSION')        || define('REQUIRED_PHP_VERSION', '5.3.3'); // PHP所需最低版本
 defined('REQUIRED_MYSQL_VERSION')      || define('REQUIRED_MYSQL_VERSION', '5.0'); // MySQL所需最低版本
-defined('SDKDOMAIN')      || define('SDKDOMAIN', 'https://api.lionsu.com');
+defined('SDKDOMAIN')      || define('SDKDOMAIN', 'https://testapi.digitalevers.com');
 defined('SYSUSER')      || define('SYSUSER', 'admin');
 defined('SYSPWD')      || define('SYSPWD', '4297f44b13955235245b2497399d7a93');
