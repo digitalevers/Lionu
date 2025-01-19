@@ -200,7 +200,7 @@ class Receive extends BaseController
 	    //$deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceLaunchData = $this->request->getJSON(true);
 	    //$platform = $this->getPlatform($deviceLaunchData['os']);
-	    file_put_contents('./json.txt', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
+	    file_put_contents('./json1.txt', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
 		//$deviceInfo['action'] = 'launch';
