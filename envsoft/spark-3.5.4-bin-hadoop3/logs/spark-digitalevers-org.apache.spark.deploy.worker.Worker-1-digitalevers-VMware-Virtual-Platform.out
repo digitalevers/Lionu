@@ -1,0 +1,29 @@
+Spark Command: /usr/lib/jvm/java-11-openjdk-amd64/bin/java -cp /home/digitalevers/下载/Lionu/envsoft/spark-3.5.4-bin-hadoop3/conf/:/home/digitalevers/下载/Lionu/envsoft/spark-3.5.4-bin-hadoop3/jars/* -Xmx1g org.apache.spark.deploy.worker.Worker --webui-port 8081 spark://digitalevers-VMware-Virtual-Platform:7077
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/01/26 19:15:23 INFO Worker: Started daemon with process name: 10120@digitalevers-VMware-Virtual-Platform
+25/01/26 19:15:23 INFO SignalUtils: Registering signal handler for TERM
+25/01/26 19:15:23 INFO SignalUtils: Registering signal handler for HUP
+25/01/26 19:15:23 INFO SignalUtils: Registering signal handler for INT
+25/01/26 19:15:23 WARN Utils: Your hostname, digitalevers-VMware-Virtual-Platform resolves to a loopback address: 127.0.1.1; using 192.168.10.13 instead (on interface ens33)
+25/01/26 19:15:23 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+25/01/26 19:15:24 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/01/26 19:15:24 INFO SecurityManager: Changing view acls to: digitalevers
+25/01/26 19:15:24 INFO SecurityManager: Changing modify acls to: digitalevers
+25/01/26 19:15:24 INFO SecurityManager: Changing view acls groups to: 
+25/01/26 19:15:24 INFO SecurityManager: Changing modify acls groups to: 
+25/01/26 19:15:24 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: digitalevers; groups with view permissions: EMPTY; users with modify permissions: digitalevers; groups with modify permissions: EMPTY
+25/01/26 19:15:24 INFO Utils: Successfully started service 'sparkWorker' on port 41217.
+25/01/26 19:15:24 INFO Worker: Worker decommissioning not enabled.
+25/01/26 19:15:25 INFO Worker: Starting Spark worker 192.168.10.13:41217 with 2 cores, 2.8 GiB RAM
+25/01/26 19:15:25 INFO Worker: Running Spark version 3.5.4
+25/01/26 19:15:25 INFO Worker: Spark home: /home/digitalevers/下载/Lionu/envsoft/spark-3.5.4-bin-hadoop3
+25/01/26 19:15:25 INFO ResourceUtils: ==============================================================
+25/01/26 19:15:25 INFO ResourceUtils: No custom resources configured for spark.worker.
+25/01/26 19:15:25 INFO ResourceUtils: ==============================================================
+25/01/26 19:15:25 INFO JettyUtils: Start Jetty 0.0.0.0:8081 for WorkerUI
+25/01/26 19:15:25 INFO Utils: Successfully started service 'WorkerUI' on port 8081.
+25/01/26 19:15:26 INFO WorkerWebUI: Bound WorkerWebUI to 0.0.0.0, and started at http://192.168.10.13:8081
+25/01/26 19:15:26 INFO Worker: Connecting to master digitalevers-VMware-Virtual-Platform:7077...
+25/01/26 19:15:26 INFO TransportClientFactory: Successfully created connection to digitalevers-VMware-Virtual-Platform/127.0.1.1:7077 after 100 ms (0 ms spent in bootstraps)
+25/01/26 19:15:26 INFO Worker: Successfully registered with master spark://digitalevers-VMware-Virtual-Platform:7077

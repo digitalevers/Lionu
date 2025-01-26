@@ -1,0 +1,23 @@
+Spark Command: /usr/lib/jvm/java-11-openjdk-amd64/bin/java -cp /home/digitalevers/下载/Lionu/envsoft/spark-3.5.4-bin-hadoop3/conf/:/home/digitalevers/下载/Lionu/envsoft/spark-3.5.4-bin-hadoop3/jars/* -Xmx1g org.apache.spark.deploy.master.Master --host digitalevers-VMware-Virtual-Platform --port 7077 --webui-port 8080
+========================================
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+25/01/26 19:14:09 INFO Master: Started daemon with process name: 9064@digitalevers-VMware-Virtual-Platform
+25/01/26 19:14:09 INFO SignalUtils: Registering signal handler for TERM
+25/01/26 19:14:09 INFO SignalUtils: Registering signal handler for HUP
+25/01/26 19:14:09 INFO SignalUtils: Registering signal handler for INT
+25/01/26 19:14:09 WARN Utils: Your hostname, digitalevers-VMware-Virtual-Platform resolves to a loopback address: 127.0.1.1; using 192.168.10.13 instead (on interface ens33)
+25/01/26 19:14:09 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+25/01/26 19:14:10 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+25/01/26 19:14:11 INFO SecurityManager: Changing view acls to: digitalevers
+25/01/26 19:14:11 INFO SecurityManager: Changing modify acls to: digitalevers
+25/01/26 19:14:11 INFO SecurityManager: Changing view acls groups to: 
+25/01/26 19:14:11 INFO SecurityManager: Changing modify acls groups to: 
+25/01/26 19:14:11 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: digitalevers; groups with view permissions: EMPTY; users with modify permissions: digitalevers; groups with modify permissions: EMPTY
+25/01/26 19:14:12 INFO Utils: Successfully started service 'sparkMaster' on port 7077.
+25/01/26 19:14:12 INFO Master: Starting Spark master at spark://digitalevers-VMware-Virtual-Platform:7077
+25/01/26 19:14:12 INFO Master: Running Spark version 3.5.4
+25/01/26 19:14:13 INFO JettyUtils: Start Jetty 0.0.0.0:8080 for MasterUI
+25/01/26 19:14:13 INFO Utils: Successfully started service 'MasterUI' on port 8080.
+25/01/26 19:14:14 INFO MasterWebUI: Bound MasterWebUI to 0.0.0.0, and started at http://192.168.10.13:8080
+25/01/26 19:14:15 INFO Master: I have been elected leader! New state: ALIVE
+25/01/26 19:15:26 INFO Master: Registering worker 192.168.10.13:41217 with 2 cores, 2.8 GiB RAM

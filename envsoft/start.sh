@@ -385,7 +385,7 @@ else
 	exit 10
 fi
 
-./spark-2.4.7-bin-hadoop2.7/sbin/start-all.sh
+./spark-3.5.4-bin-hadoop3/sbin/start-all.sh
 #提交作业
 #./bin/spark-submit --master spark://127.0.0.1:7077 --class sparkSteamReConsitution ../lionu-stream.jar
 

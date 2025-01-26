@@ -1,38 +1,38 @@
-[2021-06-22 17:41:13,429] INFO Registered kafka:type=kafka.Log4jController MBean (kafka.utils.Log4jControllerRegistration$)
-[2021-06-22 17:41:14,051] INFO Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation (org.apache.zookeeper.common.X509Util)
-[2021-06-22 17:41:14,114] INFO Registered signal handlers for TERM, INT, HUP (org.apache.kafka.common.utils.LoggingSignalHandler)
-[2021-06-22 17:41:14,118] INFO starting (kafka.server.KafkaServer)
-[2021-06-22 17:41:14,118] INFO Connecting to zookeeper on localhost:2181 (kafka.server.KafkaServer)
-[2021-06-22 17:41:14,170] INFO [ZooKeeperClient Kafka server] Initializing a new session to localhost:2181. (kafka.zookeeper.ZooKeeperClient)
-[2021-06-22 17:41:14,175] INFO Client environment:zookeeper.version=3.5.8-f439ca583e70862c3068a1f2a7d4d068eec33315, built on 05/04/2020 15:53 GMT (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,175] INFO Client environment:host.name=localhost (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,175] INFO Client environment:java.version=1.8.0_292 (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,175] INFO Client environment:java.vendor=Red Hat, Inc. (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,175] INFO Client environment:java.home=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.292.b10-1.el8_4.x86_64/jre (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,175] INFO Client environment:java.class.path=/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/activation-1.1.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/aopalliance-repackaged-2.5.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/argparse4j-0.7.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/audience-annotations-0.5.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/commons-cli-1.4.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/commons-lang3-3.8.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-api-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-basic-auth-extension-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-file-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-json-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-mirror-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-mirror-client-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-runtime-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-transforms-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/hk2-api-2.5.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/hk2-locator-2.5.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/hk2-utils-2.5.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-annotations-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-core-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-databind-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-dataformat-csv-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-datatype-jdk8-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-jaxrs-base-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-jaxrs-json-provider-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-module-jaxb-annotations-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-module-paranamer-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-module-scala_2.12-2.10.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.activation-api-1.2.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.annotation-api-1.3.4.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.inject-2.5.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.ws.rs-api-2.1.5.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.xml.bind-api-2.3.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/javassist-3.22.0-CR2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/javassist-3.26.0-GA.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/javax.servlet-api-3.1.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/javax.ws.rs-api-2.1.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jaxb-api-2.3.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-client-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-common-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-container-servlet-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-container-servlet-core-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-hk2-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-media-jaxb-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-server-2.28.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-client-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-continuation-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-http-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-io-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-security-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-server-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-servlet-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-servlets-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-util-9.4.24.v20191120.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/jopt-simple-5.0.4.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka_2.12-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka_2.12-2.6.0-sources.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-clients-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-log4j-appender-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-examples-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-scala_2.12-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-test-utils-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-tools-2.6.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/log4j-1.2.17.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/lz4-java-1.7.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/maven-artifact-3.6.3.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/metrics-core-2.2.0.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-buffer-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-codec-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-common-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-handler-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-resolver-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-transport-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-transport-native-epoll-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-transport-native-unix-common-4.1.50.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/osgi-resource-locator-1.0.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/paranamer-2.8.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/plexus-utils-3.2.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/reflections-0.9.12.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/rocksdbjni-5.18.4.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-collection-compat_2.12-2.1.6.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-java8-compat_2.12-0.9.1.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-library-2.12.11.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-logging_2.12-3.9.2.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-reflect-2.12.11.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/slf4j-api-1.7.30.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/slf4j-log4j12-1.7.30.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/snappy-java-1.1.7.3.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/validation-api-2.0.1.Final.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/zookeeper-3.5.8.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/zookeeper-jute-3.5.8.jar:/root/文档/Lionsu/envsoft/kafka_2.12-2.6.0/bin/../libs/zstd-jni-1.4.4-7.jar (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:java.library.path=/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:java.io.tmpdir=/tmp (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:java.compiler=<NA> (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:os.name=Linux (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:os.arch=amd64 (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:os.version=4.18.0-240.el8.x86_64 (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:user.name=root (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:user.home=/root (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:user.dir=/root/文档/Lionsu/envsoft (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:os.memory.free=975MB (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:os.memory.max=1024MB (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,176] INFO Client environment:os.memory.total=1024MB (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,179] INFO Initiating client connection, connectString=localhost:2181 sessionTimeout=18000 watcher=kafka.zookeeper.ZooKeeperClient$ZooKeeperClientWatcher$@59309333 (org.apache.zookeeper.ZooKeeper)
-[2021-06-22 17:41:14,183] INFO jute.maxbuffer value is 4194304 Bytes (org.apache.zookeeper.ClientCnxnSocket)
-[2021-06-22 17:41:14,190] INFO zookeeper.request.timeout value is 0. feature enabled= (org.apache.zookeeper.ClientCnxn)
-[2021-06-22 17:41:14,193] INFO [ZooKeeperClient Kafka server] Waiting until connected. (kafka.zookeeper.ZooKeeperClient)
-[2021-06-22 17:41:14,207] INFO Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error) (org.apache.zookeeper.ClientCnxn)
-[2021-06-22 17:41:14,213] INFO Socket connection established, initiating session, client: /0:0:0:0:0:0:0:1:51040, server: localhost/0:0:0:0:0:0:0:1:2181 (org.apache.zookeeper.ClientCnxn)
-[2021-06-22 17:41:14,232] INFO Session establishment complete on server localhost/0:0:0:0:0:0:0:1:2181, sessionid = 0x10001a431cf0000, negotiated timeout = 18000 (org.apache.zookeeper.ClientCnxn)
-[2021-06-22 17:41:14,235] INFO [ZooKeeperClient Kafka server] Connected. (kafka.zookeeper.ZooKeeperClient)
-[2021-06-22 17:41:14,599] INFO Cluster ID = Ji-WOXuZSYW_eJTkxn0lZw (kafka.server.KafkaServer)
-[2021-06-22 17:41:14,605] WARN No meta.properties file under dir /tmp/kafka-logs/meta.properties (kafka.server.BrokerMetadataCheckpoint)
-[2021-06-22 17:41:14,672] INFO KafkaConfig values: 
+[2025-01-26 19:12:10,422] INFO Registered kafka:type=kafka.Log4jController MBean (kafka.utils.Log4jControllerRegistration$)
+[2025-01-26 19:12:11,136] INFO Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation (org.apache.zookeeper.common.X509Util)
+[2025-01-26 19:12:11,224] INFO Registered signal handlers for TERM, INT, HUP (org.apache.kafka.common.utils.LoggingSignalHandler)
+[2025-01-26 19:12:11,232] INFO starting (kafka.server.KafkaServer)
+[2025-01-26 19:12:11,234] INFO Connecting to zookeeper on localhost:2181 (kafka.server.KafkaServer)
+[2025-01-26 19:12:11,280] INFO [ZooKeeperClient Kafka server] Initializing a new session to localhost:2181. (kafka.zookeeper.ZooKeeperClient)
+[2025-01-26 19:12:11,290] INFO Client environment:zookeeper.version=3.5.8-f439ca583e70862c3068a1f2a7d4d068eec33315, built on 05/04/2020 15:53 GMT (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:host.name=digitalevers-VMware-Virtual-Platform (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.version=11.0.25 (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.vendor=Ubuntu (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64 (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.class.path=/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/activation-1.1.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/aopalliance-repackaged-2.5.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/argparse4j-0.7.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/audience-annotations-0.5.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/commons-cli-1.4.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/commons-lang3-3.8.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-api-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-basic-auth-extension-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-file-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-json-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-mirror-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-mirror-client-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-runtime-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/connect-transforms-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/hk2-api-2.5.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/hk2-locator-2.5.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/hk2-utils-2.5.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-annotations-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-core-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-databind-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-dataformat-csv-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-datatype-jdk8-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-jaxrs-base-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-jaxrs-json-provider-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-module-jaxb-annotations-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-module-paranamer-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jackson-module-scala_2.12-2.10.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.activation-api-1.2.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.annotation-api-1.3.4.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.inject-2.5.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.ws.rs-api-2.1.5.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jakarta.xml.bind-api-2.3.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/javassist-3.22.0-CR2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/javassist-3.26.0-GA.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/javax.servlet-api-3.1.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/javax.ws.rs-api-2.1.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jaxb-api-2.3.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-client-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-common-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-container-servlet-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-container-servlet-core-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-hk2-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-media-jaxb-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jersey-server-2.28.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-client-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-continuation-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-http-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-io-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-security-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-server-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-servlet-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-servlets-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jetty-util-9.4.24.v20191120.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/jopt-simple-5.0.4.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka_2.12-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka_2.12-2.6.0-sources.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-clients-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-log4j-appender-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-examples-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-scala_2.12-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-streams-test-utils-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/kafka-tools-2.6.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/log4j-1.2.17.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/lz4-java-1.7.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/maven-artifact-3.6.3.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/metrics-core-2.2.0.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-buffer-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-codec-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-common-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-handler-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-resolver-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-transport-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-transport-native-epoll-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/netty-transport-native-unix-common-4.1.50.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/osgi-resource-locator-1.0.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/paranamer-2.8.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/plexus-utils-3.2.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/reflections-0.9.12.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/rocksdbjni-5.18.4.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-collection-compat_2.12-2.1.6.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-java8-compat_2.12-0.9.1.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-library-2.12.11.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-logging_2.12-3.9.2.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/scala-reflect-2.12.11.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/slf4j-api-1.7.30.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/slf4j-log4j12-1.7.30.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/snappy-java-1.1.7.3.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/validation-api-2.0.1.Final.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/zookeeper-3.5.8.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/zookeeper-jute-3.5.8.jar:/home/digitalevers/下载/Lionu/envsoft/kafka_2.12-2.6.0/bin/../libs/zstd-jni-1.4.4-7.jar (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.io.tmpdir=/tmp (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:java.compiler=<NA> (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:os.name=Linux (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:os.arch=amd64 (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:os.version=6.8.0-51-generic (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:user.name=digitalevers (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:user.home=/home/digitalevers (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:user.dir=/home/digitalevers/下载/Lionu/envsoft (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:os.memory.free=980MB (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,291] INFO Client environment:os.memory.max=1024MB (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,292] INFO Client environment:os.memory.total=1024MB (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,295] INFO Initiating client connection, connectString=localhost:2181 sessionTimeout=18000 watcher=kafka.zookeeper.ZooKeeperClient$ZooKeeperClientWatcher$@19b843ba (org.apache.zookeeper.ZooKeeper)
+[2025-01-26 19:12:11,301] INFO jute.maxbuffer value is 4194304 Bytes (org.apache.zookeeper.ClientCnxnSocket)
+[2025-01-26 19:12:11,316] INFO zookeeper.request.timeout value is 0. feature enabled= (org.apache.zookeeper.ClientCnxn)
+[2025-01-26 19:12:11,320] INFO [ZooKeeperClient Kafka server] Waiting until connected. (kafka.zookeeper.ZooKeeperClient)
+[2025-01-26 19:12:11,332] INFO Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error) (org.apache.zookeeper.ClientCnxn)
+[2025-01-26 19:12:11,342] INFO Socket connection established, initiating session, client: /127.0.0.1:51678, server: localhost/127.0.0.1:2181 (org.apache.zookeeper.ClientCnxn)
+[2025-01-26 19:12:11,479] INFO Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x100003b8b5d0000, negotiated timeout = 18000 (org.apache.zookeeper.ClientCnxn)
+[2025-01-26 19:12:11,534] INFO [ZooKeeperClient Kafka server] Connected. (kafka.zookeeper.ZooKeeperClient)
+[2025-01-26 19:12:12,845] INFO Cluster ID = FO0j3W9GSleBz53vhectmQ (kafka.server.KafkaServer)
+[2025-01-26 19:12:12,857] WARN No meta.properties file under dir /tmp/kafka-logs/meta.properties (kafka.server.BrokerMetadataCheckpoint)
+[2025-01-26 19:12:12,944] INFO KafkaConfig values: 
 	advertised.host.name = null
 	advertised.listeners = null
 	advertised.port = null
@@ -78,7 +78,7 @@
 	leader.imbalance.check.interval.seconds = 300
 	leader.imbalance.per.broker.percentage = 10
 	listener.security.protocol.map = PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
-	listeners = null
+	listeners = PLAINTEXT://:9092
 	log.cleaner.backoff.ms = 15000
 	log.cleaner.dedupe.buffer.size = 134217728
 	log.cleaner.delete.retention.ms = 86400000
@@ -195,7 +195,7 @@
 	socket.send.buffer.bytes = 102400
 	ssl.cipher.suites = []
 	ssl.client.auth = none
-	ssl.enabled.protocols = [TLSv1.2]
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
 	ssl.endpoint.identification.algorithm = https
 	ssl.engine.factory.class = null
 	ssl.key.password = null
@@ -204,7 +204,7 @@
 	ssl.keystore.password = null
 	ssl.keystore.type = JKS
 	ssl.principal.mapping.rules = DEFAULT
-	ssl.protocol = TLSv1.2
+	ssl.protocol = TLSv1.3
 	ssl.provider = null
 	ssl.secure.random.implementation = null
 	ssl.trustmanager.algorithm = PKIX
@@ -242,7 +242,7 @@
 	zookeeper.ssl.truststore.type = null
 	zookeeper.sync.time.ms = 2000
  (kafka.server.KafkaConfig)
-[2021-06-22 17:41:14,681] INFO KafkaConfig values: 
+[2025-01-26 19:12:12,969] INFO KafkaConfig values: 
 	advertised.host.name = null
 	advertised.listeners = null
 	advertised.port = null
@@ -288,7 +288,7 @@
 	leader.imbalance.check.interval.seconds = 300
 	leader.imbalance.per.broker.percentage = 10
 	listener.security.protocol.map = PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
-	listeners = null
+	listeners = PLAINTEXT://:9092
 	log.cleaner.backoff.ms = 15000
 	log.cleaner.dedupe.buffer.size = 134217728
 	log.cleaner.delete.retention.ms = 86400000
@@ -405,7 +405,7 @@
 	socket.send.buffer.bytes = 102400
 	ssl.cipher.suites = []
 	ssl.client.auth = none
-	ssl.enabled.protocols = [TLSv1.2]
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
 	ssl.endpoint.identification.algorithm = https
 	ssl.engine.factory.class = null
 	ssl.key.password = null
@@ -414,7 +414,7 @@
 	ssl.keystore.password = null
 	ssl.keystore.type = JKS
 	ssl.principal.mapping.rules = DEFAULT
-	ssl.protocol = TLSv1.2
+	ssl.protocol = TLSv1.3
 	ssl.provider = null
 	ssl.secure.random.implementation = null
 	ssl.trustmanager.algorithm = PKIX
@@ -452,94 +452,43 @@
 	zookeeper.ssl.truststore.type = null
 	zookeeper.sync.time.ms = 2000
  (kafka.server.KafkaConfig)
-[2021-06-22 17:41:14,711] INFO [ThrottledChannelReaper-Fetch]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
-[2021-06-22 17:41:14,711] INFO [ThrottledChannelReaper-Produce]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
-[2021-06-22 17:41:14,712] INFO [ThrottledChannelReaper-Request]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
-[2021-06-22 17:41:14,733] INFO Log directory /tmp/kafka-logs not found, creating it. (kafka.log.LogManager)
-[2021-06-22 17:41:14,740] INFO Loading logs from log dirs ArrayBuffer(/tmp/kafka-logs) (kafka.log.LogManager)
-[2021-06-22 17:41:14,742] INFO Attempting recovery for all logs in /tmp/kafka-logs since no clean shutdown file was found (kafka.log.LogManager)
-[2021-06-22 17:41:14,752] INFO Loaded 0 logs in 12ms. (kafka.log.LogManager)
-[2021-06-22 17:41:14,767] INFO Starting log cleanup with a period of 300000 ms. (kafka.log.LogManager)
-[2021-06-22 17:41:14,771] INFO Starting log flusher with a default period of 9223372036854775807 ms. (kafka.log.LogManager)
-[2021-06-22 17:41:15,488] INFO Awaiting socket connections on 0.0.0.0:9092. (kafka.network.Acceptor)
-[2021-06-22 17:41:15,521] INFO [SocketServer brokerId=0] Created data-plane acceptor and processors for endpoint : ListenerName(PLAINTEXT) (kafka.network.SocketServer)
-[2021-06-22 17:41:15,542] INFO [ExpirationReaper-0-Produce]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,543] INFO [ExpirationReaper-0-Fetch]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,544] INFO [ExpirationReaper-0-DeleteRecords]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,545] INFO [ExpirationReaper-0-ElectLeader]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,559] INFO [LogDirFailureHandler]: Starting (kafka.server.ReplicaManager$LogDirFailureHandler)
-[2021-06-22 17:41:15,584] INFO Creating /brokers/ids/0 (is it secure? false) (kafka.zk.KafkaZkClient)
-[2021-06-22 17:41:15,603] INFO Stat of the created znode at /brokers/ids/0 is: 24,24,1624354875596,1624354875596,1,0,0,72059398759841792,188,0,24
+[2025-01-26 19:12:13,028] INFO [ThrottledChannelReaper-Fetch]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-01-26 19:12:13,028] INFO [ThrottledChannelReaper-Request]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-01-26 19:12:13,029] INFO [ThrottledChannelReaper-Produce]: Starting (kafka.server.ClientQuotaManager$ThrottledChannelReaper)
+[2025-01-26 19:12:13,085] INFO Log directory /tmp/kafka-logs not found, creating it. (kafka.log.LogManager)
+[2025-01-26 19:12:13,096] INFO Loading logs from log dirs ArrayBuffer(/tmp/kafka-logs) (kafka.log.LogManager)
+[2025-01-26 19:12:13,102] INFO Attempting recovery for all logs in /tmp/kafka-logs since no clean shutdown file was found (kafka.log.LogManager)
+[2025-01-26 19:12:13,121] INFO Loaded 0 logs in 24ms. (kafka.log.LogManager)
+[2025-01-26 19:12:13,177] INFO Starting log cleanup with a period of 300000 ms. (kafka.log.LogManager)
+[2025-01-26 19:12:13,182] INFO Starting log flusher with a default period of 9223372036854775807 ms. (kafka.log.LogManager)
+[2025-01-26 19:12:14,572] INFO Awaiting socket connections on 0.0.0.0:9092. (kafka.network.Acceptor)
+[2025-01-26 19:12:14,638] INFO [SocketServer brokerId=0] Created data-plane acceptor and processors for endpoint : ListenerName(PLAINTEXT) (kafka.network.SocketServer)
+[2025-01-26 19:12:14,666] INFO [ExpirationReaper-0-Fetch]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,666] INFO [ExpirationReaper-0-Produce]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,669] INFO [ExpirationReaper-0-DeleteRecords]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,672] INFO [ExpirationReaper-0-ElectLeader]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,704] INFO [LogDirFailureHandler]: Starting (kafka.server.ReplicaManager$LogDirFailureHandler)
+[2025-01-26 19:12:14,741] INFO Creating /brokers/ids/0 (is it secure? false) (kafka.zk.KafkaZkClient)
+[2025-01-26 19:12:14,795] INFO Stat of the created znode at /brokers/ids/0 is: 24,24,1737889934779,1737889934779,1,0,0,72057849779126272,242,0,24
  (kafka.zk.KafkaZkClient)
-[2021-06-22 17:41:15,604] INFO Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT://localhost:9092, czxid (broker epoch): 24 (kafka.zk.KafkaZkClient)
-[2021-06-22 17:41:15,668] INFO [ExpirationReaper-0-topic]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,672] INFO [ExpirationReaper-0-Heartbeat]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,672] INFO [ExpirationReaper-0-Rebalance]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,681] INFO Successfully created /controller_epoch with initial epoch 0 (kafka.zk.KafkaZkClient)
-[2021-06-22 17:41:15,703] INFO [GroupCoordinator 0]: Starting up. (kafka.coordinator.group.GroupCoordinator)
-[2021-06-22 17:41:15,705] INFO [GroupCoordinator 0]: Startup complete. (kafka.coordinator.group.GroupCoordinator)
-[2021-06-22 17:41:15,713] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 9 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-22 17:41:15,721] INFO [ProducerId Manager 0]: Acquired new producerId block (brokerId:0,blockStartProducerId:0,blockEndProducerId:999) by writing to Zk with path version 1 (kafka.coordinator.transaction.ProducerIdManager)
-[2021-06-22 17:41:15,776] INFO [TransactionCoordinator id=0] Starting up. (kafka.coordinator.transaction.TransactionCoordinator)
-[2021-06-22 17:41:15,781] INFO [Transaction Marker Channel Manager 0]: Starting (kafka.coordinator.transaction.TransactionMarkerChannelManager)
-[2021-06-22 17:41:15,781] INFO [TransactionCoordinator id=0] Startup complete. (kafka.coordinator.transaction.TransactionCoordinator)
-[2021-06-22 17:41:15,811] INFO [ExpirationReaper-0-AlterAcls]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
-[2021-06-22 17:41:15,842] INFO [/config/changes-event-process-thread]: Starting (kafka.common.ZkNodeChangeNotificationListener$ChangeEventProcessThread)
-[2021-06-22 17:41:15,874] INFO [SocketServer brokerId=0] Starting socket server acceptors and processors (kafka.network.SocketServer)
-[2021-06-22 17:41:15,890] INFO [SocketServer brokerId=0] Started data-plane acceptor and processor(s) for endpoint : ListenerName(PLAINTEXT) (kafka.network.SocketServer)
-[2021-06-22 17:41:15,890] INFO [SocketServer brokerId=0] Started socket server acceptors and processors (kafka.network.SocketServer)
-[2021-06-22 17:41:15,905] INFO Kafka version: 2.6.0 (org.apache.kafka.common.utils.AppInfoParser)
-[2021-06-22 17:41:15,905] INFO Kafka commitId: 62abe01bee039651 (org.apache.kafka.common.utils.AppInfoParser)
-[2021-06-22 17:41:15,905] INFO Kafka startTimeMs: 1624354875891 (org.apache.kafka.common.utils.AppInfoParser)
-[2021-06-22 17:41:15,908] INFO [KafkaServer id=0] started (kafka.server.KafkaServer)
-[2021-06-22 17:51:15,705] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 09:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 09:12:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 09:22:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 09:32:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 09:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 09:52:14,226] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 17 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 10:02:14,220] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 10:12:14,217] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 10:22:14,232] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 10:32:14,211] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 10:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 10:52:14,220] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 11:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 11:12:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 11:22:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 11:32:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 11:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 11:52:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 12:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 12:12:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 12:22:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 12:32:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 12:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 12:52:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 13:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 13:12:14,246] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 13:22:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 13:32:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 13:42:14,356] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 100 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 13:52:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 14:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 14:12:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 14:22:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 14:32:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 14:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 14:52:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 15:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 15:12:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 15:22:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 15:32:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 15:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 15:52:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 16:02:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 16:12:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 16:22:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 16:32:14,210] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 16:42:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 16:52:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 17:02:14,230] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
-[2021-06-23 17:12:14,209] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2025-01-26 19:12:14,798] INFO Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT://digitalevers-VMware-Virtual-Platform:9092, czxid (broker epoch): 24 (kafka.zk.KafkaZkClient)
+[2025-01-26 19:12:14,909] INFO [ExpirationReaper-0-topic]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,923] INFO [ExpirationReaper-0-Heartbeat]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,931] INFO [ExpirationReaper-0-Rebalance]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:14,950] INFO Successfully created /controller_epoch with initial epoch 0 (kafka.zk.KafkaZkClient)
+[2025-01-26 19:12:14,986] INFO [GroupCoordinator 0]: Starting up. (kafka.coordinator.group.GroupCoordinator)
+[2025-01-26 19:12:14,988] INFO [GroupCoordinator 0]: Startup complete. (kafka.coordinator.group.GroupCoordinator)
+[2025-01-26 19:12:15,014] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 27 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2025-01-26 19:12:15,056] INFO [ProducerId Manager 0]: Acquired new producerId block (brokerId:0,blockStartProducerId:0,blockEndProducerId:999) by writing to Zk with path version 1 (kafka.coordinator.transaction.ProducerIdManager)
+[2025-01-26 19:12:15,156] INFO [TransactionCoordinator id=0] Starting up. (kafka.coordinator.transaction.TransactionCoordinator)
+[2025-01-26 19:12:15,174] INFO [Transaction Marker Channel Manager 0]: Starting (kafka.coordinator.transaction.TransactionMarkerChannelManager)
+[2025-01-26 19:12:15,175] INFO [TransactionCoordinator id=0] Startup complete. (kafka.coordinator.transaction.TransactionCoordinator)
+[2025-01-26 19:12:15,279] INFO [ExpirationReaper-0-AlterAcls]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2025-01-26 19:12:15,349] INFO [/config/changes-event-process-thread]: Starting (kafka.common.ZkNodeChangeNotificationListener$ChangeEventProcessThread)
+[2025-01-26 19:12:15,417] INFO [SocketServer brokerId=0] Starting socket server acceptors and processors (kafka.network.SocketServer)
+[2025-01-26 19:12:15,444] INFO [SocketServer brokerId=0] Started data-plane acceptor and processor(s) for endpoint : ListenerName(PLAINTEXT) (kafka.network.SocketServer)
+[2025-01-26 19:12:15,445] INFO [SocketServer brokerId=0] Started socket server acceptors and processors (kafka.network.SocketServer)
+[2025-01-26 19:12:15,477] INFO Kafka version: 2.6.0 (org.apache.kafka.common.utils.AppInfoParser)
+[2025-01-26 19:12:15,478] INFO Kafka commitId: 62abe01bee039651 (org.apache.kafka.common.utils.AppInfoParser)
+[2025-01-26 19:12:15,478] INFO Kafka startTimeMs: 1737889935452 (org.apache.kafka.common.utils.AppInfoParser)
+[2025-01-26 19:12:15,482] INFO [KafkaServer id=0] started (kafka.server.KafkaServer)
