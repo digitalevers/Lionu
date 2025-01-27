@@ -41,3 +41,10 @@
 [2025-01-26 19:11:26,521] INFO Using checkIntervalMs=60000 maxPerMinute=10000 (org.apache.zookeeper.server.ContainerManager)
 [2025-01-26 19:12:11,390] INFO Creating new log file: log.1 (org.apache.zookeeper.server.persistence.FileTxnLog)
 [2025-01-27 12:00:17,030] WARN Unable to read additional data from client sessionid 0x0, likely client has closed socket (org.apache.zookeeper.server.NIOServerCnxn)
+[2025-01-27 14:03:16,480] INFO Expiring session 0x100003b8b5d0000, timeout of 18000ms exceeded (org.apache.zookeeper.server.ZooKeeperServer)
+[2025-01-27 14:03:22,240] WARN Unable to read additional data from client sessionid 0x100003b8b5d0000, likely client has closed socket (org.apache.zookeeper.server.NIOServerCnxn)
+[2025-01-27 14:03:35,768] INFO Invalid session 0x100003b8b5d0000 for client /127.0.0.1:54650, probably expired (org.apache.zookeeper.server.ZooKeeperServer)
+[2025-01-27 14:19:04,820] WARN Unable to read additional data from client sessionid 0x100003b8b5d0002, likely client has closed socket (org.apache.zookeeper.server.NIOServerCnxn)
+[2025-01-27 14:19:26,985] WARN Unable to read additional data from client sessionid 0x100003b8b5d0002, likely client has closed socket (org.apache.zookeeper.server.NIOServerCnxn)
+[2025-01-27 14:50:00,107] INFO Expiring session 0x100003b8b5d0002, timeout of 18000ms exceeded (org.apache.zookeeper.server.ZooKeeperServer)
+                                                                                                                                                                                   
