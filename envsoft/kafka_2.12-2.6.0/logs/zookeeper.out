@@ -40,3 +40,4 @@
 [2025-01-26 19:11:26,487] INFO Snapshotting: 0x0 to /tmp/zookeeper/version-2/snapshot.0 (org.apache.zookeeper.server.persistence.FileTxnSnapLog)
 [2025-01-26 19:11:26,521] INFO Using checkIntervalMs=60000 maxPerMinute=10000 (org.apache.zookeeper.server.ContainerManager)
 [2025-01-26 19:12:11,390] INFO Creating new log file: log.1 (org.apache.zookeeper.server.persistence.FileTxnLog)
+[2025-01-27 12:00:17,030] WARN Unable to read additional data from client sessionid 0x0, likely client has closed socket (org.apache.zookeeper.server.NIOServerCnxn)
