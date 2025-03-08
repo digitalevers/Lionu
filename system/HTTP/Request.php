@@ -495,6 +495,9 @@ class Request extends Message implements RequestInterface
 	            break;
 	    }
 	    
+	    if ($flags === null) {
+	        $flags = [];
+	    }
 	    return filter_var($value, $filter, $flags);
 	}
 }
