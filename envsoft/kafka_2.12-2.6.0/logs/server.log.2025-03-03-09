@@ -1,0 +1,2 @@
+[2025-03-03 10:00:17,425] INFO Expiring session 0x100000190770002, timeout of 18000ms exceeded (org.apache.zookeeper.server.ZooKeeperServer)
+[2025-03-03 10:00:25,235] INFO Invalid session 0x100000190770002 for client /127.0.0.1:48346, probably expired (org.apache.zookeeper.server.ZooKeeperServer)
