@@ -78,6 +78,4 @@ defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest auto
 
 defined('REQUIRED_PHP_VERSION')        || define('REQUIRED_PHP_VERSION', '5.3.3'); // PHP所需最低版本
 defined('REQUIRED_MYSQL_VERSION')      || define('REQUIRED_MYSQL_VERSION', '5.0'); // MySQL所需最低版本
-defined('SDKDOMAIN')      || define('SDKDOMAIN', 'testapi.digitalevers.com');
-defined('SYSUSER')      || define('SYSUSER', 'admin');
-defined('SYSPWD')      || define('SYSPWD', 'e10adc3949ba59abbe56e057f20f883e');
+
