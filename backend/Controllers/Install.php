@@ -169,6 +169,7 @@ class Install extends Controller
 	                echo $e->getMessage();
 	            }*/
 	            
+	            
 	            //方式二 写入单独的配置文件 Config/DatabaseConfig.php 2025-03-08
 	            /* $db_config_file_path = APPPATH . '/Config/DatabaseConfig.php';
 	            $db_config = [
@@ -185,11 +186,23 @@ class Install extends Controller
 	                _json(['code'=>197,'msg'=>"无法写入数据库配置文件到 $db_config_file_path, 请确保有权限写入\n"],1);
 	            } */
 	            
+	            
 	            //方式三 写入 common_config/application.properties 配置文件
-	            
-	            
-	            // 记录系统配置和管理员信息
-	            file_put_contents(ROOTPATH . 'installed', 2);
+	            $properties_file = ROOTPATH . '/common_config/application.properties';
+	            $db_config = [
+	                'mysql.hostname' => $hostname,
+	                'mysql.user'     => $username,
+	                'mysql.password' => $password,
+	                'mysql.database' => $database,
+	                'mysql.port'     => $port
+	            ];
+	            if(file_exists($properties_file)){
+	                update_properties_file($properties_file, $db_config);
+	                // 记录系统配置和管理员信息
+	                file_put_contents(ROOTPATH . 'installed', 2);
+	            } else {
+	                _json(['code'=>198,'msg'=>'properties file is miss'],1);
+	            }  
 	    	} else {
 	    		_json(['code'=>198,'msg'=>'data is empty'],1);
 	    	}
@@ -208,7 +221,7 @@ class Install extends Controller
     {
         $install_file = ROOTPATH . 'installed';
         //$db_config_file = APPPATH . 'Config/Database.php';
-        $config_path = APPPATH . 'Config/';
+        $comm_config_path = ROOTPATH . 'common_config/application.properties';
         $const_config_file = APPPATH . 'Config/Constants.php';
         
         $style = '<style>.code{color:#8aa6c1;background-color:#222;padding:10px;border-radius:5px;width:800px;}
@@ -230,11 +243,11 @@ class Install extends Controller
                         <p class="code"> chmod 0766 ' . $db_config_file . '</p>
                       </li>';
         } */
-        if (! is_writable($config_path)) {
+        if (! is_writable($comm_config_path)) {
             // exec('sudo chmod 0766 '.$db_config_file, $chmod_db_result, $chmod_db_status);
             $tips .= '<li>
-                        <p>配置目录不可写，请在root权限下使用下列命令修改权限</p>
-                        <p class="code"> chmod 0766 ' . $config_path . '</p>
+                        <p>通用配置文件不可写，请在root权限下使用下列命令修改权限</p>
+                        <p class="code"> chmod 0766 ' . $comm_config_path . '</p>
                       </li>';
         }
         if (! is_writable($const_config_file)) {
@@ -329,10 +342,10 @@ class Install extends Controller
             $opts = array(
                 'http' => array(
                     'method' => "GET",
-                    'timeout' => 5 // 单位秒
+                    'timeout' => 1 // 单位秒
                 )
             );
-            if (file_get_contents($sdkDomainUrlHTTP) != 'ok') {
+            if (@file_get_contents($sdkDomainUrlHTTP, false, stream_context_create($opts)) != 'ok') {
                 _json(['code' => 107,'msg' => '该域名没有公网解析或者没有指向量U的frontend目录'],1);
             }
         } catch (\Exception $e) {
@@ -347,10 +360,10 @@ class Install extends Controller
             $opts = array(
                 'http' => array(
                     'method' => "GET",
-                    'timeout' => 5 // 单位秒
+                    'timeout' => 2 // 单位秒
                 )
             );
-            if (file_get_contents($sdkDomainUrlHTTPS) != 'ok') {
+            if (file_get_contents($sdkDomainUrlHTTPS, false, stream_context_create($opts)) != 'ok') {
                 _json(['code' => 109,'msg' => '该域名未部署 https '],1);
             }
         } catch (\Exception $e) {
@@ -376,8 +389,7 @@ class Install extends Controller
         
         try {
             unset($custom['database']);
-            //dump($custom);
-
+            //print_r($custom);
             $db = \Config\Database::connect($custom);
             $db->connect();
             $this->checkMySQLEnv($db);
@@ -388,7 +400,7 @@ class Install extends Controller
             if (stripos($error, 'timed') !== false) {
                 _json(['code' => 100,'msg' => $error], 1);
             } elseif (stripos($error, 'denied') !== false) {
-                _json(['code' => 101,'msg' => $error], 1);
+                _json(['code' => 101,'msg' => '登录失败,请确认 MySQL 用户名和密码'], 1);
             } elseif (stripos($error, 'Connection refused') !== false) {
                 _json(['code' => 102,'msg' => $error], 1);
             } elseif (stripos($error, 'mysql_compat') !== false) {
