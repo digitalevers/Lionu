@@ -41,7 +41,7 @@ class Autoload extends AutoloadConfig
 	 */
 	public $psr4 = [
 		APP_NAMESPACE => APPPATH, // For custom app namespace
-		'Config'      => BACKENDPATH . 'Config',
+		'Config'      => BACKENDPATH . 'Config',  //前端模块加载并使用后端模块的配置（数据库配置等）
 	];
 
 	/**

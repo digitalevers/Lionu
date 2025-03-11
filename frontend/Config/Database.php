@@ -1,11 +1,5 @@
 <?php namespace Config;
 
-/*define( 'hostname', '' );
-define( 'username', '' );
-define( 'password', '' );
-define( 'database', '' );
-define( 'port', '' );*/
-
 /**
  * Database Configuration
  *
