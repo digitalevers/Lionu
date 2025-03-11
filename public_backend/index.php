@@ -69,6 +69,9 @@ $app = require rtrim($paths->systemDirectory, '/ ') . '/bootstrap.php';
  * up the engines and make this app do its thang.
  */
 try{
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     $app->run();
 } catch(\Exception $e){
     echo $e->getFile();
