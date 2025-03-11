@@ -170,7 +170,7 @@ class Install extends Controller
 	            }*/
 	            
 	            //方式二 写入单独的配置文件 Config/DatabaseConfig.php 2025-03-08
-	            $db_config_file_path = APPPATH . '/Config/DatabaseConfig.php';
+	            /* $db_config_file_path = APPPATH . '/Config/DatabaseConfig.php';
 	            $db_config = [
 	                'hostname' => $hostname,
 	                'username' => $username,
@@ -183,7 +183,7 @@ class Install extends Controller
 	                //echo "数据库配置文件已成功生成并写入\n";
 	            } else {
 	                _json(['code'=>197,'msg'=>"无法写入数据库配置文件到 $db_config_file_path, 请确保有权限写入\n"],1);
-	            }
+	            } */
 	            
 	            //方式三 写入 common_config/application.properties 配置文件
 	            

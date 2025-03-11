@@ -88,12 +88,15 @@ class Database extends \CodeIgniter\Database\Config
 		// Ensure that we always set the database group to 'tests' if
 		// we are currently running an automated test suite, so that
 		// we don't overwrite live data on accident.
-		$dbConfig = require_once APPPATH . '/Config/DatabaseConfig.php';
-		$this->default['hostname'] = isset($dbConfig['hostname']) ? $dbConfig['hostname'] : '127.0.0.1';
-		$this->default['username'] = isset($dbConfig['username']) ? $dbConfig['username'] : 'root';
-		$this->default['password'] = isset($dbConfig['password']) ? $dbConfig['password'] : '';
-		$this->default['database'] = isset($dbConfig['database']) ? $dbConfig['database'] : 'lionu';
-		$this->default['port']     = isset($dbConfig['port'])     ? $dbConfig['port']     : '3306';
+		//加载并解析 properties 文件
+		$propertiesFile = ROOTPATH . '/common_config/application.properties';
+		$properties = read_properties_file($propertiesFile);
+		
+		$this->default['hostname'] = isset($properties['hostname']) ? $dbConfig['hostname'] : '127.0.0.1';
+		$this->default['username'] = isset($properties['username']) ? $dbConfig['username'] : 'root';
+		$this->default['password'] = isset($properties['password']) ? $dbConfig['password'] : '';
+		$this->default['database'] = isset($properties['database']) ? $dbConfig['database'] : 'lionu';
+		$this->default['port']     = isset($properties['port'])     ? $dbConfig['port']     : '3306';
 		
 		if (ENVIRONMENT === 'testing')
 		{
