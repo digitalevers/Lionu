@@ -65,7 +65,7 @@ class Paths
 	 *
 	 * NO TRAILING SLASH!
 	 */
-	public $appFrontEndDirectory = __DIR__ . '/../../front';
+	public $appFrontEndDirectory = __DIR__ . '/../../frontend';
 
 	/*
 	 * ---------------------------------------------------------------

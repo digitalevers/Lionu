@@ -92,12 +92,12 @@ class Database extends \CodeIgniter\Database\Config
 		$propertiesFile = ROOTPATH . '/common_config/application.properties';
 		$properties = read_properties_file($propertiesFile);
 		
-		$this->default['hostname'] = isset($properties['hostname']) ? $dbConfig['hostname'] : '127.0.0.1';
-		$this->default['username'] = isset($properties['username']) ? $dbConfig['username'] : 'root';
-		$this->default['password'] = isset($properties['password']) ? $dbConfig['password'] : '';
-		$this->default['database'] = isset($properties['database']) ? $dbConfig['database'] : 'lionu';
-		$this->default['port']     = isset($properties['port'])     ? $dbConfig['port']     : '3306';
-		
+		$this->default['hostname'] = isset($properties['mysql.hostname']) ? $properties['mysql.hostname'] : '127.0.0.1';
+		$this->default['username'] = isset($properties['mysql.user'])     ? $properties['mysql.user']     : 'root';
+		$this->default['password'] = isset($properties['mysql.password']) ? $properties['mysql.password'] : '';
+		$this->default['database'] = isset($properties['mysql.database']) ? $properties['mysql.database'] : 'lionu';
+		$this->default['port']     = isset($properties['mysql.port'])     ? $properties['mysql.port']     : '3306';
+
 		if (ENVIRONMENT === 'testing')
 		{
 			$this->defaultGroup = 'tests';

@@ -244,7 +244,7 @@ class Request extends Message implements RequestInterface
 				$which = FILTER_FLAG_IPV6;
 				break;
 			default:
-				$which = null;
+				$which = [];
 				break;
 		}
 
@@ -486,9 +486,9 @@ class Request extends Message implements RequestInterface
 	                $filter = FILTER_SANITIZE_ADD_SLASHES;
 	            }
 	            break;
-	        case FILTER_SANITIZE_STRING || FILTER_SANITIZE_STRIPPED:
+	        case FILTER_SANITIZE_FULL_SPECIAL_CHARS || FILTER_SANITIZE_STRIPPED:
 	            if(version_compare(PHP_VERSION, '8.1.0', '>=')){
-	                return htmlspecialchars(strip_tags($value), ENT_NOQUOTES, null, null);
+	                return htmlspecialchars(strip_tags($value), ENT_NOQUOTES, null, true);
 	            }
 	            break;
 	        default:

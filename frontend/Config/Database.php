@@ -31,10 +31,10 @@ class Database extends \CodeIgniter\Database\Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => hostname,
-		'username' => username,
-		'password' => password,
-		'database' => database,
+		'hostname' => '',
+		'username' => '',
+		'password' => '',
+		'database' => '',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
@@ -48,7 +48,7 @@ class Database extends \CodeIgniter\Database\Config
 		'compress' => false,
 		'strictOn' => false,
 		'failover' => [],
-		'port'     => port,
+		'port'     => '',
 	];
 
 	/**
@@ -88,6 +88,17 @@ class Database extends \CodeIgniter\Database\Config
 		// Ensure that we always set the database group to 'tests' if
 		// we are currently running an automated test suite, so that
 		// we don't overwrite live data on accident.
+		
+		//加载并解析 properties 文件
+		$propertiesFile = ROOTPATH . '/common_config/application.properties';
+		$properties = read_properties_file($propertiesFile);
+		
+		$this->default['hostname'] = isset($properties['mysql.hostname']) ? $properties['mysql.hostname'] : '127.0.0.1';
+		$this->default['username'] = isset($properties['mysql.user'])     ? $properties['mysql.user']     : 'root';
+		$this->default['password'] = isset($properties['mysql.password']) ? $properties['mysql.password'] : '';
+		$this->default['database'] = isset($properties['mysql.database']) ? $properties['mysql.database'] : 'lionu';
+		$this->default['port']     = isset($properties['mysql.port'])     ? $properties['mysql.port']     : '3306';
+		
 		if (ENVIRONMENT === 'testing')
 		{
 			$this->defaultGroup = 'tests';

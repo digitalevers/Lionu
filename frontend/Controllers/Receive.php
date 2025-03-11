@@ -121,6 +121,9 @@ class Receive extends BaseController
         $res = $this->insert($db, 'log_android_click_data', $clickData);
         if(!$res){
              //TODO写错误日志并推送消息到前端
+            _json(['code'=>199,'msg'=>'fail'],1);
+        } else {
+            _json(['code'=>200,'msg'=>'ok'],1);
         }
     }
     
