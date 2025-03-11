@@ -127,6 +127,7 @@ class Install extends Controller
 	            $database = trim($post['dbname']);
 	            $port = trim($post['dbport']);
 	            
+	            //方式一 写入 Config/Database.php 数据库配置文件
 	            /* $db_config_file_path = APPPATH . '/Config/Database.php';
 	            $db_config_strings = file($db_config_file_path);
 	            $key = 0;
@@ -168,7 +169,7 @@ class Install extends Controller
 	                echo $e->getMessage();
 	            }*/
 	            
-	            //单独的配置文件 2025-03-08
+	            //方式二 写入单独的配置文件 Config/DatabaseConfig.php 2025-03-08
 	            $db_config_file_path = APPPATH . '/Config/DatabaseConfig.php';
 	            $db_config = [
 	                'hostname' => $hostname,
@@ -183,6 +184,9 @@ class Install extends Controller
 	            } else {
 	                _json(['code'=>197,'msg'=>"无法写入数据库配置文件到 $db_config_file_path, 请确保有权限写入\n"],1);
 	            }
+	            
+	            //方式三 写入 common_config/application.properties 配置文件
+	            
 	            
 	            // 记录系统配置和管理员信息
 	            file_put_contents(ROOTPATH . 'installed', 2);
