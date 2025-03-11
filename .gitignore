@@ -2,7 +2,7 @@
 # Operating Specific Junk Files
 #-------------------------
 backend/Config/DatabaseConfig.php
-#envsoft/kafka_2.12-2.6.0/logs/*.log*
+envsoft/kafka_2.12-2.6.0/logs/*.log*
 # OS X
 .DS_Store
 .AppleDouble
