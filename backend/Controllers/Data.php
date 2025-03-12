@@ -300,9 +300,9 @@ class Data extends BaseController{
         $pay_detail_sql = 'SELECT SUM(pay_total_devices) AS pay_total_devices, SUM(pay_active_amount) AS pay_active_amount,SUM(pay_active_count) AS pay_active_count, SUM(pay_new_amount) AS pay_new_amount, SUM(pay_new_devices) AS pay_new_device, pay_date FROM statistics_pay WHERE {where_key_str} GROUP BY plan_id';
         $pay_detail_arr = $this->query_and_get($db, $filter_params, $pay_detail_sql, 'plan_id');
         
-        dump($base_arr);
-        dump($plan_info_map);
-        exit;
+        //dump($base_arr);
+        //dump($plan_info_map);
+        //exit;
         foreach ($base_arr as $_plan_id=>&$v){
             foreach ($retention_conf as $_conf){
                 $retention_count = isset($_retention_arr[$_plan_id][$_conf]['retention_count']) ? $_retention_arr[$_plan_id][$_conf]['retention_count'] : 0;
@@ -318,7 +318,7 @@ class Data extends BaseController{
             $v['pay_arpu'] = $v['base_active'] == 0 ? '-' : $v['pay_total_amount'] / $v['base_active'];                                      //arpu 总付费金额 / 总激活设备数
             $v['pay_arppu'] = $v['pay_total_devices'] == 0 ? '-' : $v['pay_total_amount'] / $v['pay_total_devices'];   
             
-            $v['plan_name'] = $plan_info_map[$_plan_id]['plan_name'];;
+            $v['plan_name'] = isset($plan_info_map[$_plan_id]['plan_name']) ? $plan_info_map[$_plan_id]['plan_name'] : '自然量';
         }
         
         $result = array_values($base_arr);
@@ -446,7 +446,7 @@ class Data extends BaseController{
             $v['pay_arpu'] = $v['base_active'] == 0 ? '-' : $v['pay_total_amount'] / $v['base_active'];                                      //arpu 总付费金额 / 总激活设备数
             $v['pay_arppu'] = $v['pay_total_devices'] == 0 ? '-' : $v['pay_total_amount'] / $v['pay_total_devices'];  
             
-            $v['channel_name'] = $channel_info_map[$_cid]['channel_name'];
+            $v['channel_name'] = isset($channel_info_map[$_cid]['channel_name']) ? $channel_info_map[$_cid]['channel_name'] : '自然量';
         }
         
         $result = array_values($base_arr);
