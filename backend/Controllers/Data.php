@@ -300,6 +300,9 @@ class Data extends BaseController{
         $pay_detail_sql = 'SELECT SUM(pay_total_devices) AS pay_total_devices, SUM(pay_active_amount) AS pay_active_amount,SUM(pay_active_count) AS pay_active_count, SUM(pay_new_amount) AS pay_new_amount, SUM(pay_new_devices) AS pay_new_device, pay_date FROM statistics_pay WHERE {where_key_str} GROUP BY plan_id';
         $pay_detail_arr = $this->query_and_get($db, $filter_params, $pay_detail_sql, 'plan_id');
         
+        dump($base_arr);
+        dump($plan_info_map);
+        exit;
         foreach ($base_arr as $_plan_id=>&$v){
             foreach ($retention_conf as $_conf){
                 $retention_count = isset($_retention_arr[$_plan_id][$_conf]['retention_count']) ? $_retention_arr[$_plan_id][$_conf]['retention_count'] : 0;
