@@ -2,7 +2,7 @@
 # Operating Specific Junk Files
 #-------------------------
 envsoft/kafka_2.12-2.6.0/logs/*
-
+public_frontend/*.log
 # OS X
 .DS_Store
 .AppleDouble
