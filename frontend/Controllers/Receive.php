@@ -221,13 +221,13 @@ class Receive extends BaseController
 	    
 	    //TopicConf
 	    $topicConf = new \RdKafka\TopicConf();
-	    
+	    $conf->set('log_level', (string)LOG_DEBUG);
 	    //-1必须等所有brokers同步完成的确认 1当前服务器确认 0不确认，这里如果是0回调里的offset无返回，如果是1和-1会返回offset
 	    // 我们可以利用该机制做消息生产的确认，不过还不是100%，因为有可能会中途kafka服务器挂掉
 	    $topicConf->set('request.required.acks', 0);
 	    
 	    $rk = new \RdKafka\Producer($conf);
-	    $rk->setLogLevel(LOG_DEBUG);
+	    //$rk->setLogLevel(LOG_DEBUG);   //deprecated
 	    $rk->addBrokers('127.0.0.1:9092');
 	    $topic = $rk->newTopic('launch', $topicConf);
 	    //echo json_encode($deviceLaunchData);
