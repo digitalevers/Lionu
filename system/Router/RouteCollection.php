@@ -1014,7 +1014,7 @@ class RouteCollection implements RouteCollectionInterface
 	 *
 	 * @return \CodeIgniter\Router\RouteCollectionInterface
 	 */
-	public function match(array $verbs = [], string $from, $to, array $options = null): RouteCollectionInterface
+	public function match(array $verbs, string $from, $to, array $options = null): RouteCollectionInterface
 	{
 		foreach ($verbs as $verb)
 		{
