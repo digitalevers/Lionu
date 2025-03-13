@@ -5,6 +5,7 @@ envsoft/kafka_2.12-2.6.0/logs/*
 public_frontend/*.log
 envsoft/saveCheckPoint1/*
 saveCheckPoint1/*
+*.properties
 # OS X
 .DS_Store
 .AppleDouble
