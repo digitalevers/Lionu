@@ -176,7 +176,7 @@ class Sysin extends NeedloginController
      */
     public function startKafkaAndSpark()
     {
-        _json(['code' => 199,'msg' => '请使用 root 用户执行' . ROOTPATH . 'envsoft/start.sh脚本启动系统，启动后请刷新页面'], 1);
+        _json(['code' => 199,'msg' => '请使用 root 用户执行 ' . ROOTPATH . 'envsoft/start.sh 脚本启动系统，启动后请刷新页面'], 1);
         /* $post = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
         $soft = $post['soft'];
         switch ($soft) {
