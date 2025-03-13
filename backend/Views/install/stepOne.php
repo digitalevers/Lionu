@@ -26,7 +26,7 @@
             <tr>
                 <th scope="row"><label for="sysuser">SDK上报域名</label></th>
                 <td><input class="conf required" name="sdkdomain" id="sdkdomain" type="text"  size="25" placeholder="请填写一个公网解析的域名" data-valid="isNonEmpty||isDomain" data-error="<i class='icon-tips'></i>域名不能为空||<i class='icon-tips'></i>请填写正确格式的域名"/><label class="focus valid"></label>
-                <p>该域名的虚拟目录与量U系统虚拟目录处于同一文件夹下，并配好https</p>
+                <p>该域名需配置 https</p>
                 </td>
                 <td id="sdkdomain-desc"></td>
             </tr>
