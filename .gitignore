@@ -6,6 +6,8 @@ public_frontend/*.log
 envsoft/saveCheckPoint1/*
 saveCheckPoint1/*
 *.properties
+lionu-stream-1.0-SNAPSHOT.jar
+
 # OS X
 .DS_Store
 .AppleDouble
