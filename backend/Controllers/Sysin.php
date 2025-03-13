@@ -155,8 +155,8 @@ class Sysin extends NeedloginController
                 $data['kafka'] = 1;
             }
         }
-        // 监测spark运行情况 spark默认7077端口
-        $check_spark_shell = "netstat -tnlp | grep  7077";
+        // 监测spark运行情况 spark默认7077端口(spark-submit 4040端口)
+        $check_spark_shell = "netstat -tnlp | grep  4040";
         exec($check_spark_shell, $check_spark_result, $check_spark_status);
         if (! $check_spark_status) {
             if (is_array($check_spark_result) && count($check_spark_result) > 0) {
