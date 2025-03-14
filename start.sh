@@ -181,7 +181,7 @@ fi
 	
 ################### 第二部分 编译librdkafka基础库和php扩展rdkafka ###################
 #判断已经是否已经编译安装过librdkafka
-#当前执行脚本的绝对路径
+#当前执行脚本文件所在的绝对路径
 currdir=$(cd $(dirname $0); pwd)
 echo "/usr/local/lib" >>/etc/ld.so.conf
 ldconfig
@@ -190,7 +190,7 @@ if [ `ldconfig -p | grep librdkafka | wc -l` -eq 0 ]
 then
 	if [ ! -f  /tmp/librdkafka-master.zip ]
 	then
-		cp ${currdir}/librdkafka-master.zip /tmp/librdkafka-master.zip
+		cp ${currdir}/envsoft/librdkafka-master.zip /tmp/librdkafka-master.zip
 	fi
 	#删除旧文件夹
 	if [ -d /tmp/librdkafka-master ]
@@ -213,7 +213,7 @@ mkdir /tmp/rdkafka
 
 if [ ! -f  /tmp/rdkafka-6.0.3.tgz ]
 then
-	cp ${currdir}/rdkafka-6.0.3.tgz /tmp/rdkafka-6.0.3.tgz
+	cp ${currdir}/envsoft/rdkafka-6.0.3.tgz /tmp/rdkafka-6.0.3.tgz
 fi
 
 if [ -d /tmp/rdkafka ]
@@ -368,24 +368,25 @@ exit 3
 fi
 
 ##配置密钥并追加公钥以便 Spark 免密启动
-if [ ! -f ~/.ssh/id_rsa.spark.lionu ]
-then
-	ssh-keygen -t rsa -f ~/.ssh/id_rsa.spark.lionu -q -N ''
-	if [ -f ~/.ssh/id_rsa.spark.lionu.pub ]
-	then 
-		cat ~/.ssh/id_rsa.spark.lionu.pub >> ~/.ssh/authorized_keys
-		##追加config配置文件 如果config文件不存在 会自动新建
-		echo -e "\nHost localhost\nIdentityFile ~/.ssh/id_rsa.spark.lionu\nUser root\n"	>> ~/.ssh/config
-	else
-		echo '公钥文件不存在'
-		exit 11
-	fi
-else
-	echo '密钥文件已存在'
-	exit 10
-fi
+# 使用spark-submit提交作业时这段可以注释
+# if [ ! -f ~/.ssh/id_rsa.spark.lionu ]
+# then
+# 	ssh-keygen -t rsa -f ~/.ssh/id_rsa.spark.lionu -q -N ''
+# 	if [ -f ~/.ssh/id_rsa.spark.lionu.pub ]
+# 	then 
+# 		cat ~/.ssh/id_rsa.spark.lionu.pub >> ~/.ssh/authorized_keys
+# 		##追加config配置文件 如果config文件不存在 会自动新建
+# 		echo -e "\nHost localhost\nIdentityFile ~/.ssh/id_rsa.spark.lionu\nUser root\n"	>> ~/.ssh/config
+# 	else
+# 		echo '公钥文件不存在'
+# 		exit 11
+# 	fi
+# else
+# 	echo '密钥文件已存在'
+# 	exit 10
+# fi
 
-#./envsoft/spark-2.4.7-bin-hadoop2.7/sbin/start-all.sh
+#./spark-2.4.7-bin-hadoop2.7/sbin/start-all.sh
 #提交作业
 ./envsoft/spark-2.4.7-bin-hadoop2.7/bin/spark-submit --master spark://127.0.0.1:7077 --class sparkStreamReConstruction lionu-stream-1.0-SNAPSHOT.jar
 
