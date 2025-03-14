@@ -555,7 +555,7 @@ class Install extends Controller
           `app_id` int(11) NOT NULL COMMENT '应用ID',
           `plan_id` int(11) NOT NULL,
           `channel_id` int(11) NOT NULL,
-          `click_count` int(11) NOT NULL COMMENT '点击总数',
+          `click_count` int(11) NOT NULL DEFAULT '0' COMMENT '点击总数',
           `launch_count` int(11) NOT NULL DEFAULT '0' COMMENT '启动次数',
           `active_count` int(11) NOT NULL DEFAULT '0' COMMENT '激活设备数',
           `reg_count` int(11) NOT NULL DEFAULT '0' COMMENT '注册次数',
