@@ -209,7 +209,7 @@ class Receive extends BaseController
 	    //$deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceLaunchData = $this->request->getJSON(true);
 	    //$platform = $this->getPlatform($deviceLaunchData['os']);
-	    file_put_contents('./launch.log', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
+	    //file_put_contents('./launch.log', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
 		$deviceInfo = $deviceLaunchData['deviceInfo'];
 		//$deviceInfo['action'] = 'launch';
@@ -274,7 +274,7 @@ class Receive extends BaseController
 	    //$deviceRegData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $deviceRegData = $this->request->getJSON(true);
 	    //$platform = $this->getPlatform($deviceRegData['os']);
-	    file_put_contents('./reg.log', 'receive/reg-'.json_encode($deviceRegData)."\r\n",FILE_APPEND);
+	    //file_put_contents('./reg.log', 'receive/reg-'.json_encode($deviceRegData)."\r\n",FILE_APPEND);
 	    //转为一维数组
 		$deviceInfo = $deviceRegData['deviceInfo'];
 		//$deviceInfo['action'] = 'reg';
@@ -312,7 +312,7 @@ class Receive extends BaseController
 	    //$devicePayData = $this->request->getVar(null, FILTER_SANITIZE_MAGIC_QUOTES);
 	    $devicePayData = $this->request->getJSON(true);
 	    //$platform = $this->getPlatform($devicePayData['os']);
-	    file_put_contents('./pay.log', 'receive/pay-'.json_encode($devicePayData)."\r\n",FILE_APPEND);
+	    //file_put_contents('./pay.log', 'receive/pay-'.json_encode($devicePayData)."\r\n",FILE_APPEND);
 		//转为一维数组
 		$deviceInfo = $devicePayData['deviceInfo'];
 		//$deviceInfo['action'] = 'pay';
