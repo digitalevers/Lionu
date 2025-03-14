@@ -297,7 +297,7 @@ class Data extends BaseController{
             'plan_id='=>$plan_id,
             'uid='=>$uid
         ];
-        $pay_detail_sql = 'SELECT SUM(pay_total_devices) AS pay_total_devices, SUM(pay_active_amount) AS pay_active_amount,SUM(pay_active_count) AS pay_active_count, SUM(pay_new_amount) AS pay_new_amount, SUM(pay_new_devices) AS pay_new_device, pay_date FROM statistics_pay WHERE {where_key_str} GROUP BY plan_id';
+        $pay_detail_sql = 'SELECT SUM(pay_total_devices) AS pay_total_devices, SUM(pay_active_amount) AS pay_active_amount,SUM(pay_active_count) AS pay_active_count, SUM(pay_new_amount) AS pay_new_amount, SUM(pay_new_devices) AS pay_new_device, plan_id FROM statistics_pay WHERE {where_key_str} GROUP BY plan_id';
         $pay_detail_arr = $this->query_and_get($db, $filter_params, $pay_detail_sql, 'plan_id');
         
         //dump($base_arr);
@@ -427,7 +427,7 @@ class Data extends BaseController{
             'plan_id='=>$plan_id,
             'uid='=>$uid
         ];
-        $pay_detail_sql = 'SELECT SUM(pay_total_devices) AS pay_total_devices, SUM(pay_active_amount) AS pay_active_amount,SUM(pay_active_count) AS pay_active_count, SUM(pay_new_amount) AS pay_new_amount, SUM(pay_new_devices) AS pay_new_device, pay_date FROM statistics_pay WHERE {where_key_str} GROUP BY channel_id';
+        $pay_detail_sql = 'SELECT SUM(pay_total_devices) AS pay_total_devices, SUM(pay_active_amount) AS pay_active_amount,SUM(pay_active_count) AS pay_active_count, SUM(pay_new_amount) AS pay_new_amount, SUM(pay_new_devices) AS pay_new_device, channel_id FROM statistics_pay WHERE {where_key_str} GROUP BY channel_id';
         $pay_detail_arr = $this->query_and_get($db, $filter_params, $pay_detail_sql, 'channel_id');
         
         foreach ($base_arr as $_cid=>&$v){
