@@ -1141,6 +1141,9 @@ if (! function_exists('view_cell'))
 	}
 }
 
+/**
+ * 以下为新增函数
+ */
 if (! function_exists('dump')) {
     
     function dump($var, $echo = true, $label = null, $strict = true)
@@ -1304,4 +1307,41 @@ if (! function_exists('update_properties_file')) {
         // 写回属性文件
         write_properties_file($filename, $properties);
     }
+}
+
+/**
+ * AES 解密
+ * @param $encryptedData 待解密数据
+ * @param $aesKey        base64后的AES 密钥
+ * 
+ * @return 解密后的数据
+ */
+if (! function_exists('decryptAES')) {
+    function decryptAES($encryptedData, $base64Key) {
+        /* list($iv, $encryptedData) = explode(':', $encryptedData);
+        $iv = base64_decode($iv);
+        $encryptedData = base64_decode($encryptedData);
+        $decryptedData = openssl_decrypt($encryptedData, 'aes-256-ecb', $aesKey, OPENSSL_RAW_DATA, $iv);    //第二个参数需要跟android端加密对应
+        return $decryptedData; */
+   
+        //解码Base64编码的密钥
+        $aesKey = base64_decode($base64Key);
+        $encryptedData = base64_decode($encryptedData);
+        //使用AES ECB模式解密
+        $decryptedData = openssl_decrypt($encryptedData, 'AES-256-ECB', $aesKey, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);//第二个参数需要跟android端加密对应
+        //去除PKCS5填充
+        if($decryptedData === false){
+            return false;
+        }
+        $decryptedData = pkcs5_unpad($decryptedData);
+        return $decryptedData;
+    }
+}
+
+function pkcs5_unpad($text)
+{
+    $pad = ord($text[strlen($text) - 1]);
+    if ($pad > strlen($text)) return false;
+    if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) return false;
+    return substr($text, 0, -1 * $pad);
 }

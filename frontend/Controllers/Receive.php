@@ -7,7 +7,7 @@ use Kafka\Producer;
 
 class Receive extends BaseController
 {
-    	
+    private $aesKeyBase64Key = "aIlPkPRHwHpmuJj2qCkbCRw6N4+KRcHYpf2VwU33lvU=";
     //receive adv data
 	/* public function clickhouse()
 	{
@@ -207,7 +207,10 @@ class Receive extends BaseController
 	 */
 	public function launch(){
 	    //$deviceLaunchData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
-	    $deviceLaunchData = $this->request->getJSON(true);
+	    //$deviceLaunchData = $this->request->getJSON(true);
+	    //$deviceLaunchData = $this->request->getRawInput();
+	    $deviceLaunchData = $this->request->getAESData($this->aesKeyBase64Key);
+
 	    //$platform = $this->getPlatform($deviceLaunchData['os']);
 	    //file_put_contents('./launch.log', 'receive/launch-'.json_encode($deviceLaunchData)."\r\n",FILE_APPEND);
 	     //转为一维数组
@@ -272,7 +275,9 @@ class Receive extends BaseController
 	 */
 	public function reg(){
 	    //$deviceRegData = $this->request->getPost(null, FILTER_SANITIZE_MAGIC_QUOTES);
-	    $deviceRegData = $this->request->getJSON(true);
+	    //$deviceRegData = $this->request->getJSON(true);
+	    $deviceRegData = $this->request->getAESData($this->aesKeyBase64Key);
+	    
 	    //$platform = $this->getPlatform($deviceRegData['os']);
 	    //file_put_contents('./reg.log', 'receive/reg-'.json_encode($deviceRegData)."\r\n",FILE_APPEND);
 	    //转为一维数组
@@ -310,7 +315,9 @@ class Receive extends BaseController
 	 */
 	public function pay(){
 	    //$devicePayData = $this->request->getVar(null, FILTER_SANITIZE_MAGIC_QUOTES);
-	    $devicePayData = $this->request->getJSON(true);
+	    //$devicePayData = $this->request->getJSON(true);
+	    $devicePayData = $this->request->getAESData($this->aesKeyBase64Key);
+	    
 	    //$platform = $this->getPlatform($devicePayData['os']);
 	    //file_put_contents('./pay.log', 'receive/pay-'.json_encode($devicePayData)."\r\n",FILE_APPEND);
 		//转为一维数组

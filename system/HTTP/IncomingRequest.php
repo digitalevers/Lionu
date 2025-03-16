@@ -589,6 +589,28 @@ class IncomingRequest extends Request
 
 		return $this->files->getFile($fileID);
 	}
+	
+	/**
+	 * 解密AES请求数据
+	 * 若数据不是AES加密数据则会原样输出 如果是json字符串则会解析成数组
+	 */
+	public function getAESData(string $aesKeyBase64Key){
+	    $rawInput = trim(file_get_contents("php://input"));
+	    $rawToArr = json_decode($rawInput, true);
+	    if(json_last_error() === JSON_ERROR_NONE){
+	        //json数据直接返回解析后的数组
+	        return $rawToArr;
+	    } else {
+	        //非json数据尝试AES解密 解密成功后按json解析 否则直接原样输出
+	        $decryptAES = decryptAES($rawInput, $aesKeyBase64Key);
+	        if(empty($decryptAES)){
+	            return $rawInput;
+	        } else {
+	            return json_decode($decryptAES,true);
+	        }
+	    }
+	    
+	}
 
 	//--------------------------------------------------------------------
 
