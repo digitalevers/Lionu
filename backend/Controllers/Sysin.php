@@ -85,7 +85,7 @@ class Sysin extends NeedloginController
             }
         } elseif($app['app_os'] == 2) {
             //iOS
-            header('Location:/download_sdk/LionU_iOS.rar');
+            header('Location:/download_sdk/LionU_iOS.zip');
             exit; //一定要加这行才会进行跳转
         }
     }
