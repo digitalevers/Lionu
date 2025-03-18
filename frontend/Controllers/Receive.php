@@ -150,7 +150,7 @@ class Receive extends BaseController
      * @param array $clickData
      */
     private function _iOSClickParamsFilter($clickData){
-        $required = array('idfa_md5','mac_md5','ip','appid','channel_id','plan_id');
+        $required = array('idfa_md5','mac_md5','ip','app_id','channel_id','plan_id');
         foreach ($required as $field){
             if(!isset($clickData[$field]) || empty($clickData[$field]) || (strpos($clickData[$field], '_') !== false)){
                 //TODO 参数写入日志
@@ -167,20 +167,20 @@ class Receive extends BaseController
         switch ($clickData['channel_id']){
             //头条
             case 1:
-                if(strpos($clickData['ip'],'.') !== false){
+                /*if(strpos($clickData['ip'],'.') !== false){
                     $_clickData['ipv4'] = md5($clickData['ip']); 
                 } elseif(strpos($clickData['ip'],':') !== false) {
                     $_clickData['ipv6'] = md5($clickData['ip']); 
-                }
+                }*/
                 $_clickData += array(
-                    'plan_id'=>$get['plan_id'],
-                    'channel_id'=>$get['channel_id'],
-                    'idfa'=>$get['idfa'],
-                    'idfa_md5'=>md5($get['idfa']),
-                    'mac_md5'=>$get['mac'],         //头条的mac字段是去掉:后的md5
-                    'model'=>$get['model'],
-                    'appid'=>$get['app_id'],
-                    'click_time'=>$get['ts']
+		    'external_ip'=>$clickData['ip'],
+                    'plan_id'=>$clickData['plan_id'],
+                    'channel_id'=>$clickData['channel_id'],
+                    'idfa_md5'=>md5($clickData['idfa_md5']),
+                    'mac_md5'=>$clickData['mac_md5'],         //头条的mac字段是去掉:后的md5
+                    'model'=>$clickData['model'],
+                    'appid'=>$clickData['app_id'],
+                    'click_time'=>$clickData['ts']
                 );
                 return $_clickData;
                 break;
