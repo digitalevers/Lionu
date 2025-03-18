@@ -13,3 +13,4 @@
  *
  * @link: https://codeigniter4.github.io/CodeIgniter4/
  */
+defined('AES_BASE64_KEY')  || define('AES_BASE64_KEY', 'aIlPkPRHwHpmuJj2qCkbCRw6N4+KRcHYpf2VwU33lvU=');        //这里填写你的AES密钥
