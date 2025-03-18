@@ -66,7 +66,8 @@ class Sysin extends NeedloginController
                     //下载SDK
                     header('Content-Description: File Transfer');
                     header('Content-Type: application/vnd.android.package-archive');
-                    header('Content-Disposition: attachment; filename='.basename($dest_file));
+                    //header('Content-Disposition: attachment; filename='.basename($dest_file));
+                    header('Content-Disposition: attachment; filename=lionu.aar');
                     header('Content-Transfer-Encoding: binary');
                     header('Expires: 0');
                     header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
