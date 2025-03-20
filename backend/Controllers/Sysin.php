@@ -56,8 +56,17 @@ class Sysin extends NeedloginController
                 $cp_result = copy($source_file,$dest_file);
                 $zip = new \ZipArchive;
                 if ($zip->open($dest_file) === TRUE) {
+                    //查找数据库中的SDKDOMAIN域名
+                    //$db->setDatabase('test');
+                    $select_sql = "SELECT conf_value FROM u_conf WHERE conf_key=?";
+                    $domain = $db->query($select_sql, ['SDKDOMAIN'])->getRowArray();
+                    if (! isset($domain['conf_value']) || empty($domain['conf_value'])) {
+                        throw new \Exception('sdkdomain error');
+                        exit();
+                    }
+                    $host = $domain['conf_value'];
                     $conf = array(
-                        'host'=>SDKDOMAIN,
+                        'host'=>$host,
                         'appid'=>$app_id
                     );
                     $conf = json_encode($conf);
