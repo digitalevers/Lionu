@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use CodeIgniter\HTTP\IncomingRequest;
+
 /**
  * Class NeedloginController
  *
@@ -18,6 +20,7 @@ namespace App\Controllers;
 class NeedloginController extends BaseController
 {
 
+    protected $uid = 0;
 	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
@@ -34,12 +37,23 @@ class NeedloginController extends BaseController
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
+		$this->checkToken();
 		//
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.:
 		// $this->session = \Config\Services::session();
+	}
+	
+	protected function checkToken(){
+	    $header = $this->request->getHeader('Token');
+	    if (empty($header) || empty($token = $header->getValue())) {
+	        echo json_encode(['error' => 'hack']);
+	        exit(-1);
+	    } else {
+	        $this->uid = authcode($token,'DECODE');
+	    }
 	}
 
 }
