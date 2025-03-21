@@ -16,7 +16,7 @@ class Login extends BaseController
 	    $result = $db->query("SELECT * FROM u_user WHERE `username`=? AND `pwd`=?", [$username, md5($pwd)])->getResultArray();
 	    if(count($result) > 0){
 	        //登录成功
-	        $src_data = $result[0]['id'];
+	        $src_data = $result[0]['id'].'_'.$result[0]['username'];
 	        $encode_data = authcode($src_data,'ENCODE');
 	        echo json_encode(['code'=>200,'msg'=>'ok','data'=>$encode_data]);
 	    } else {

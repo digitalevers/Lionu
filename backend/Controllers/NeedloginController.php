@@ -21,6 +21,8 @@ class NeedloginController extends BaseController
 {
 
     protected $uid = 0;
+    protected $username = '';
+    
 	/**
 	 * An array of helpers to be loaded automatically upon
 	 * class instantiation. These helpers will be available
@@ -52,7 +54,20 @@ class NeedloginController extends BaseController
 	        echo json_encode(['error' => 'hack']);
 	        exit(-1);
 	    } else {
-	        $this->uid = authcode($token,'DECODE');
+	        $tokenDecode = authcode($token,'DECODE');
+	        if($tokenDecode){
+	            $info = explode('_', $tokenDecode);
+	            if(empty($info) || empty($info[0]) || empty($info[1])){
+	                echo json_encode(['error' => 'hack']);
+	                exit(-1);
+	            } else {
+	                $this->uid = $info[0];
+	                $this->username = $info[1];
+	            }
+	        } else {
+	            echo json_encode(['error' => 'hack']);
+	            exit(-1);
+	        }
 	    }
 	}
 
