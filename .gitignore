@@ -8,6 +8,7 @@ saveCheckPoint1/*
 *.properties
 lionu-stream-1.0-SNAPSHOT.jar
 public_backend/config.json
+*.ffs_db
 
 # OS X
 .DS_Store
