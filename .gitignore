@@ -9,6 +9,7 @@ saveCheckPoint1/*
 lionu-stream-1.0-SNAPSHOT.jar
 public_backend/config.json
 *.ffs_db
+*.ffs_lock
 .settings
 
 # OS X
