@@ -1173,6 +1173,103 @@ if (! function_exists('dump')) {
     }
 }
 
+
+if (! function_exists('requestPost')) {
+    
+    function requestPost($url='', $data = array(), $header = array(),$timeout=6,$count=3,$response_header=0){
+        static $index = 0 ;
+        $index++;
+        if(empty($url) || (strpos($url, 'http') === false)){
+            throw new exception('缺少url参数或者url格式不合法,url应包含http或者https协议');
+            exit();
+        } else {
+            //如果是https协议的url,检查openssl组件
+            //用检测函数存在的方式进行检查 检测组件是否加载的方式不一定准确
+            //有些组件被直接编译进了php,并不一定是通过加载组件的方式进行加载的，比如说 openssl
+            if(strpos($url, 'https') !== false){
+                if(!function_exists('openssl_open')){
+                    throw new exception('缺少openssl组件支持,请确保openssl扩展已经正确加载或已经编译进php');
+                    exit();
+                }
+            }
+        }
+        $ch = null;
+        if(function_exists('curl_init')){
+            $ch = curl_init();
+        }
+        if($ch){
+            //初始化curl
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,FALSE); //不验证 https 证书
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
+            curl_setopt($ch, CURLOPT_HEADER, $response_header);    //是否返回响应头信息 true 返回 false不返回
+            if(!empty($header)){
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+            }
+            
+            //curl_setopt($ch, CURLOPT_PROXY, '192.168.2.103'); //代理服务器地址
+            //curl_setopt($ch, CURLOPT_PROXYPORT,'8888'); 		//代理服务器端口
+            //curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_ENCODING, 'gzip'); //处理返回content-type:gzip的乱码
+            curl_setopt($ch, CURLOPT_POST, 1);				// post方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);	// post数据 php数组格式或字符串
+            $content = curl_exec($ch);
+            if($content === false){
+                if(curl_errno($ch) == CURLE_OPERATION_TIMEDOUT){
+                    if($index < $count){
+                        //请求重发
+                        requestPost($url,$data);
+                    }
+                }
+                
+            }
+            if($response_header){
+                $response_header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+                curl_close($ch);
+                $response_header = substr($content,0,$response_header_size);
+                $header_arr = explode("\r\n", $response_header);
+                //print_r($header_arr);
+                foreach ($header_arr as $v){
+                    if(stripos($v, 'set-cookie') !== false){
+                        $_temp = explode(':', $v);
+                        unset($_temp[0]);                          //2022-12-13 修复cookie中包含时间格式 造成读取数据不全的bug
+                        $_cookies_arr[] = trim(implode('', $_temp));
+                    }
+                }
+                //$response_cookie = implode("\r\n\r\n", $_cookies_arr);
+                $response_cookie = $_cookies_arr;
+                //preg_match('/^Set-Cookie: (.*?);/m',$response_header,$m);
+                //print_r($response_header);
+                $response_body = substr($content,$response_header_size);
+                return array('response_header'=>$response_header,'response_body'=>$response_body,'response_cookie'=>$response_cookie);
+            } else {
+                return $content;
+            }
+        } else {
+            //检查 allow_url_fopen 配置
+            //开启返回 "1" 关闭返回 ""
+            //allow_url_fopen的修改范围是PHP_INI_SYSTEM，这个选项只能在php.ini或httpd.conf中修改，不能在脚本中修改
+            if(ini_get('allow_url_fopen') == ''){
+                //ini_set('allow_url_fopen', '1');
+                throw new Exception('请检查allow_url_fopen配置项是否在php.ini中开启');
+                exit();
+        }
+        $data = http_build_query($data);
+        $context = array(
+            'http'=>array(
+                'method'=>'POST',
+                'content'=>$data
+            )
+        );
+        $context  = stream_context_create($context);
+        $content = file_get_contents($url,false,$context);
+        return $content;
+        }
+    }
+}
+
 if (! function_exists('_json')) {
     
     function _json($data, $exit = 0)
