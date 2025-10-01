@@ -367,7 +367,7 @@ class Rules
 	 *
 	 * @return boolean
 	 */
-	public function required_with($str = null, string $fields, array $data): bool
+	public function required_with($str, string $fields, array $data): bool
 	{
 		$fields = explode(',', $fields);
 
@@ -419,7 +419,7 @@ class Rules
 	 *
 	 * @return boolean
 	 */
-	public function required_without($str = null, string $fields, array $data): bool
+	public function required_without($str, string $fields, array $data): bool
 	{
 		$fields = explode(',', $fields);
 

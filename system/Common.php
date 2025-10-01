@@ -1173,10 +1173,11 @@ if (! function_exists('dump')) {
     }
 }
 
-
+/**
+ * 2025-09-28 添加 $method参数以支持PUT请求
+ */
 if (! function_exists('requestPost')) {
-    
-    function requestPost($url='', $data = array(), $header = array(),$timeout=6,$count=3,$response_header=0){
+    function requestPost($url='', $data = array(), $header = array(), $method = 'POST', $timeout=6, $count=3, $response_header=0){
         static $index = 0 ;
         $index++;
         if(empty($url) || (strpos($url, 'http') === false)){
@@ -1213,8 +1214,13 @@ if (! function_exists('requestPost')) {
             //curl_setopt($ch, CURLOPT_SAFE_UPLOAD, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_ENCODING, 'gzip'); //处理返回content-type:gzip的乱码
-            curl_setopt($ch, CURLOPT_POST, 1);				// post方式
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);	// post数据 php数组格式或字符串
+            if(strtoupper($method) === 'PUT') {
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data); // PUT数据
+            } else {
+                curl_setopt($ch, CURLOPT_POST, 1);				// post方式
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);	// post数据 php数组格式或字符串（json或url拼接参数&=）
+            }
             $content = curl_exec($ch);
             if($content === false){
                 if(curl_errno($ch) == CURLE_OPERATION_TIMEDOUT){
@@ -1270,6 +1276,81 @@ if (! function_exists('requestPost')) {
     }
 }
 
+/**
+ * GET请求数据 如果有curl扩展 就使用curl进行请求 如果没有相应模块 就使用file_get_contents函数
+ * url 		要请求的url地址
+ * cookie 	请求附带的cookie 例子 abc=123;def=456
+ * timeout 	超时时间
+ * count	请求总数(超时重发)
+ */
+if (! function_exists('requestGet')) {
+    function requestGet($url,$header = array(),$cookie = '',$timeout = 6,$count = 3){
+        static $index = 0 ;
+        $index++;
+        if(empty($url) || (strpos($url, 'http') === false)){
+            throw new exception('缺少url参数或者url格式不合法,url应包含http或者https协议');
+            exit();
+        } else {
+            //如果是https协议的url,检查openssl组件
+            //用检测函数存在的方式进行检查 检测组件是否加载的方式不一定准确
+            //有些组件被直接编译进了php,并不一定是通过加载组件的方式进行加载的，比如说 openssl
+            if(strpos($url, 'https') !== false){
+                if(!function_exists('openssl_open')){
+                    throw new exception('缺少openssl组件支持,请确保openssl扩展已经正确加载或已经编译进php');
+                    exit();
+                }
+            }
+        }
+        $ch = null;
+        if(function_exists('curl_init')){
+            $ch = curl_init();
+        } else {
+            //throw new Exception('没有curl_init函数,请检查curl组件是否已经正常加载');
+            //exit();
+        }
+        if($ch){
+            //初始化curl
+            curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,FALSE); //不认证https证书
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
+            //curl_setopt($ch, CURLOPT_PROXY, '192.168.1.173'); //代理服务器地址
+            //curl_setopt($ch, CURLOPT_PROXYPORT,'8888'); 		//代理服务器端口
+            //curl_setopt($ch, CURLOPT_ENCODING, 'gzip'); //处理返回content-type:gzip的乱码
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);		//设置获取的信息以文件流的形式返回，而不是直接输出
+            if(!empty($cookie)){
+                curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+            }
+            if(!empty($header)){
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+            }
+            $content = curl_exec($ch);
+            if($content === false){
+                if(curl_errno($ch) == CURLE_OPERATION_TIMEDOUT){
+                    if($index < $count){
+                        //重发请求
+                        requestGet($url,$header,$cookie,$timeout,$count);
+                    }
+                } else {
+                    exit(curl_error($ch));
+                }
+            }
+            curl_close($ch);
+        } else {
+            //检查 allow_url_fopen 配置
+            //开启返回 "1" 关闭返回 ""
+            //allow_url_fopen的修改范围是PHP_INI_SYSTEM，这个选项只能在php.ini或httpd.conf中修改，不能在脚本中修改
+            if(ini_get('allow_url_fopen') == ''){
+                //ini_set('allow_url_fopen', '1');
+                throw new Exception('请检查allow_url_fopen配置项是否在php.ini中开启');
+                exit();
+            }
+            $content = file_get_contents($url);
+        }
+        return $content;
+    }
+}
+
 if (! function_exists('_json')) {
     
     function _json($data, $exit = 0)
@@ -1279,6 +1360,24 @@ if (! function_exists('_json')) {
         } else {
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
+    }
+}
+
+/**
+ * 以二维数组某个键值作为新数组的键名
+ * 若有重复键名 则合并为新数组的二级数组
+ */
+if (! function_exists('groupByKey')) {
+    function groupByKey(array &$array, $key): array
+    {
+        $result = [];
+        
+        while ($item = array_shift($array)) {
+            $keyValue = $item[$key];
+            $result[$keyValue][] = $item;
+        }
+        
+        return $result;
     }
 }
 
@@ -1426,19 +1525,140 @@ if (! function_exists('decryptAES')) {
         $encryptedData = base64_decode($encryptedData);
         //使用AES ECB模式解密
         $decryptedData = openssl_decrypt($encryptedData, 'AES-256-ECB', $aesKey, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);//第二个参数需要跟android端加密对应
-        //去除PKCS5填充
         if($decryptedData === false){
             return false;
         }
+        //去除PKCS5填充
         $decryptedData = pkcs5_unpad($decryptedData);
         return $decryptedData;
     }
 }
 
-function pkcs5_unpad($text)
-{
-    $pad = ord($text[strlen($text) - 1]);
-    if ($pad > strlen($text)) return false;
-    if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) return false;
-    return substr($text, 0, -1 * $pad);
+/**
+ * 去除PKCS5填充
+ */
+if (! function_exists('pkcs5_unpad')) {
+    function pkcs5_unpad($text)
+    {
+        $pad = ord($text[strlen($text) - 1]);
+        if ($pad > strlen($text)) return false;
+        if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) return false;
+        return substr($text, 0, -1 * $pad);
+    }
+}
+
+/**
+ * 根据UA判断是否为移动设备
+ */
+if (! function_exists('isMobileDevice')) {
+    function isMobileDevice() {
+        $ua = strtolower($_SERVER['HTTP_USER_AGENT']);
+        $mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'windows phone'];
+        
+        foreach ($mobileKeywords as $keyword) {
+            if (strpos($ua, $keyword) !== false) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
+
+
+/**
+ * 获取聚合转化类型
+ * bing只有少数几个事件内置了代码 其他的事件都需要自定义代码
+ */
+if (! function_exists('getTotalConvertType')) {
+    function getTotalConvertType() {
+        $convertTypeTotal = [
+            1=>['360Code'=>'SUBMIT',            'baiduCode'=>3,     'bingCode'=>'submit_lead_form',     'txCode'=>'RESERVATION_CHECK',      'text'=>'表单提交成功(bing提交表单)'],
+            2=>['360Code'=>'CALL',              'baiduCode'=>30,    'bingCode'=>'contact',              'txCode'=>'PHONE_CONNECTED',        'text'=>'有效电话拨打(bing联系)'],
+            3=>['360Code'=>'ADVISORY',          'baiduCode'=>119,   'bingCode'=>'advisory',             'txCode'=>'ONLINE_CONSULT',         'text'=>'一句话咨询'],
+            4=>['360Code'=>'SITEDOWNLOAD',      'baiduCode'=>6,     'bingCode'=>'download',             'txCode'=>'DOWNLOAD_APP',           'text'=>'下载按钮点击'],
+            5=>['360Code'=>'SUBMIT_BUTTON',     'baiduCode'=>5,     'bingCode'=>'submit_lead_form',     'txCode'=>'RESERVATION_CHECK',      'text'=>'表单按钮点击(bing提交表单)'],
+            6=>['360Code'=>'ADVISORY_BUTTON',   'baiduCode'=>1,     'bingCode'=>'contact',              'txCode'=>'ONLINE_CONSULT',         'text'=>'咨询按钮点击(bing联系)'],
+            7=>['360Code'=>'CALL_BUTTON',       'baiduCode'=>2,     'bingCode'=>'call_button',          'txCode'=>'MAKE_PHONE_CALL',        'text'=>'电话按钮点击'],
+            8=>['360Code'=>'SHOP_BUTTON',       'baiduCode'=>7,     'bingCode'=>'shop_button',          'txCode'=>'COMPLETE_ORDER',         'text'=>'购买按钮点击'],
+            9=>['360Code'=>'CART_BUTTON',       'baiduCode'=>46,    'bingCode'=>'add_to_cart',          'txCode'=>'ADD_TO_CART',            'text'=>'加入购物车按钮点击'],
+            10=>['360Code'=>'ORDER',            'baiduCode'=>14,    'bingCode'=>'purchase',             'txCode'=>'COMPLETE_ORDER',         'text'=>'订单'],
+            11=>['360Code'=>'REGISTERED',       'baiduCode'=>25,    'bingCode'=>'signup',               'txCode'=>'REGISTER',               'text'=>'注册(bing)'],
+            12=>['360Code'=>'ROLE_CREAT',       'baiduCode'=>27,    'bingCode'=>'role_create',          'txCode'=>'CREATE_ROLE',            'text'=>'创建角色'],
+            13=>['360Code'=>'SITE_VISIT_DEPTH', 'baiduCode'=>52,    'bingCode'=>'page_view',            'txCode'=>'VIEW_CONTENT',           'text'=>'深度页面访问(bing页面浏览)'],
+            14=>['360Code'=>'APP_DOWNLOAD',     'baiduCode'=>6,     'bingCode'=>'app_download',         'txCode'=>'DOWNLOAD_APP',           'text'=>'APP下载'],
+            15=>['360Code'=>'APP_ACTIVATION',   'baiduCode'=>4,     'bingCode'=>'app_activation',       'txCode'=>'ACTIVATE_APP',           'text'=>'APP激活'],
+            16=>['360Code'=>'APP_RETENTION',    'baiduCode'=>28,    'bingCode'=>'app_retention',        'txCode'=>'ONE_DAY_LEAVE',          'text'=>'APP次留'],
+            17=>['360Code'=>'APP_PAY',          'baiduCode'=>26,    'bingCode'=>'app_pay',              'txCode'=>'PURCHASE',               'text'=>'APP付费'],
+            18=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>27,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'客户自定义(bing其他)'],
+            19=>['360Code'=>'MIDDLE_PAGE',      'baiduCode'=>119,   'bingCode'=>'middle_page',          'txCode'=>'CUSTOM',                 'text'=>'中间页'],
+            20=>['360Code'=>'REGISTER_BUTTON',  'baiduCode'=>25,    'bingCode'=>'signup',               'txCode'=>'REGISTER',               'text'=>'注册按钮点击(bing)'],
+            21=>['360Code'=>'BROWSE_DEPTH',     'baiduCode'=>20,    'bingCode'=>'page_view',            'txCode'=>'PAGE_VIEW',              'text'=>'有效浏览(bing页面浏览)'],
+            22=>['360Code'=>'BROWSETIME',       'baiduCode'=>119,   'bingCode'=>'browsetime',           'txCode'=>'CUSTOM',                 'text'=>'浏览时长'],
+            23=>['360Code'=>'SCAN_BUTTON',      'baiduCode'=>119,   'bingCode'=>'scan_button',          'txCode'=>'SCANCODE_WX',            'text'=>'扫码点击'],
+            24=>['360Code'=>'ADVISORY_DEPTH',   'baiduCode'=>17,    'bingCode'=>'advisory_depth',       'txCode'=>'ONLINE_CONSULT',         'text'=>'三句话咨询'],
+            25=>['360Code'=>'LOW_PAY',          'baiduCode'=>90,    'bingCode'=>'low_pay',              'txCode'=>'PURCHASE',               'text'=>'低价付费'],
+            26=>['360Code'=>'ADD_FANS_WX',      'baiduCode'=>79,    'bingCode'=>'add_fans_wx',          'txCode'=>'CUSTOM',                 'text'=>'微信加粉'],
+            27=>['360Code'=>'PAY',              'baiduCode'=>26,    'bingCode'=>'begin_checkout',       'txCode'=>'INITIATE_CHECKOUT',      'text'=>'付费(bing开始结账)'],
+            28=>['360Code'=>'SCAN_CODE',        'baiduCode'=>119,   'bingCode'=>'scan_code',            'txCode'=>'SCANCODE_WX',            'text'=>'扫码'],
+            29=>['360Code'=>'APPLET_STARTUP',   'baiduCode'=>112,   'bingCode'=>'wx_applet_startup',    'txCode'=>'CUSTOM',                 'text'=>'微信小程序调起'],
+            30=>['360Code'=>'APPLET_STARTUP',   'baiduCode'=>116,   'bingCode'=>'bd_applet_startup',    'txCode'=>'CUSTOM',                 'text'=>'百度小程序调起'],
+            31=>['360Code'=>'LOGIN',            'baiduCode'=>49,    'bingCode'=>'login',                'txCode'=>'LOGIN',                  'text'=>'登录(bing)'],
+            32=>['360Code'=>'ADD_TO_CART',      'baiduCode'=>46,    'bingCode'=>'add_to_cart',          'txCode'=>'ADD_TO_CART',            'text'=>'加购物车(bing加购物车)'],
+            33=>['360Code'=>'VPPV',             'baiduCode'=>52,    'bingCode'=>'vppv',                 'txCode'=>'VIEW_CONTENT',           'text'=>'VPPV页面深度访问'],
+            34=>['360Code'=>'INTENTIONAL',      'baiduCode'=>75,    'bingCode'=>'intentional',          'txCode'=>'CONSULT_INTENTION',      'text'=>'发现意向'],
+            35=>['360Code'=>'REAL_NAME',        'baiduCode'=>119,   'bingCode'=>'real_name',            'txCode'=>'CUSTOM',                 'text'=>'实名'],
+            36=>['360Code'=>'RETENTION',        'baiduCode'=>28,    'bingCode'=>'retention',            'txCode'=>'ONE_DAY_LEAVE',          'text'=>'次留'],
+            37=>['360Code'=>'PLACE_ORDER',      'baiduCode'=>14,    'bingCode'=>'purchase',             'txCode'=>'COMPLETE_ORDER',         'text'=>'订单提交(bing购买)'],
+            38=>['360Code'=>'EFFECTIVE_ADVISORY','baiduCode'=>92,   'bingCode'=>'request_quote',        'txCode'=>'CONSULT',                'text'=>'有效咨询(bing请求报价)'],
+            39=>['360Code'=>'ORDER_VALIDITY',   'baiduCode'=>45,    'bingCode'=>'order_validity',       'txCode'=>'CONFIRM_DELIVERY_ORDER', 'text'=>'订单有效性'],
+            40=>['360Code'=>'ACTIVATION',       'baiduCode'=>4,     'bingCode'=>'activation',           'txCode'=>'ACTIVATE_APP',           'text'=>'激活'],
+            41=>['360Code'=>'DETAILS_PAGE_ARRIVED','baiduCode'=>48, 'bingCode'=>'details_page_arrived', 'txCode'=>'PRODUCT_VIEW',           'text'=>'详情页到达'],
+            42=>['360Code'=>'PAY_SUCCESS',      'baiduCode'=>10,    'bingCode'=>'pay_success',          'txCode'=>'PURCHASE_MEMBER_CARD',   'text'=>'服务购买成功'],
+            43=>['360Code'=>'STARTUP_APP',      'baiduCode'=>71,    'bingCode'=>'startup_app',          'txCode'=>'START_APP',              'text'=>'调起APP'],
+            44=>['360Code'=>'CREDIT',           'baiduCode'=>42,    'bingCode'=>'credit',               'txCode'=>'CREDIT',                 'text'=>'授信'],
+            45=>['360Code'=>'WX_BUTTON_C',      'baiduCode'=>35,    'bingCode'=>'wx_button_c',          'txCode'=>'CUSTOM',                 'text'=>'微信复制按钮点击'],
+            46=>['360Code'=>'CONCEM',           'baiduCode'=>68,    'bingCode'=>'concem',               'txCode'=>'FOLLOW',                 'text'=>'关注'],
+            47=>['360Code'=>'LEAVE_CONTACT',    'baiduCode'=>18,    'bingCode'=>'leave_contact',        'txCode'=>'LEAVE_INFORMATION',      'text'=>'留联'],
+            48=>['360Code'=>'RELEASE',          'baiduCode'=>119,   'bingCode'=>'release',              'txCode'=>'CUSTOM',                 'text'=>'发布'],
+            49=>['360Code'=>'TRY_TO_PLAY',      'baiduCode'=>119,   'bingCode'=>'try_to_play',          'txCode'=>'CUSTOM',                 'text'=>'试玩'],
+            50=>['360Code'=>'SUBMIT_RESUME',    'baiduCode'=>119,   'bingCode'=>'submit_resume',        'txCode'=>'CUSTOM',                 'text'=>'投递简历'],
+            51=>['360Code'=>'ENTERPRISE_CERTIFICATION','baiduCode'=>119,'bingCode'=>'enterprise_cer',   'txCode'=>'CUSTOM',                 'text'=>'企业认证'],
+            52=>['360Code'=>'VISIT_CLINIC',     'baiduCode'=>119,   'bingCode'=>'visit_clinic',         'txCode'=>'CUSTOM',                 'text'=>'到诊'],
+            53=>['360Code'=>'APPLET_PAY',       'baiduCode'=>27,    'bingCode'=>'applet_pay',           'txCode'=>'CUSTOM',                 'text'=>'小程序内付费'],
+            54=>['360Code'=>'APPLET_ROLE_CREAT','baiduCode'=>27,    'bingCode'=>'applet_role_creat',    'txCode'=>'CUSTOM',                 'text'=>'小程序内创角'],
+            55=>['360Code'=>'ADVISORY_BUTTON',  'baiduCode'=>8,     'bingCode'=>'msg_advisory_button',  'txCode'=>'MAKE_PHONE_CALL',        'text'=>'短信咨询按钮点击'],
+            56=>['360Code'=>'ADVISORY_BUTTON',  'baiduCode'=>32,    'bingCode'=>'qq_advisory_button',   'txCode'=>'ONLINE_CONSULT',         'text'=>'QQ咨询按钮点击'],
+            57=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>41,    'bingCode'=>'apply',                'txCode'=>'APPLY',                  'text'=>'申请'],
+            58=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>47,    'bingCode'=>'favorite',             'txCode'=>'ADD_TO_WISHLIST',        'text'=>'商品收藏'],
+            59=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>50,    'bingCode'=>'book_appointment',     'txCode'=>'RESERVATION',            'text'=>'预约(bing预约)'],
+            60=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>56,    'bingCode'=>'get_directions',       'txCode'=>'VISIT_STORE',            'text'=>'到店(bing获取路线)'],
+            61=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>57,    'bingCode'=>'startup_shop',         'txCode'=>'CUSTOM',                 'text'=>'店铺调起'],
+            62=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>61,    'bingCode'=>'redirect',             'txCode'=>'CUSTOM',                 'text'=>'二次跳转'],
+            63=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>67,    'bingCode'=>'startup_wx_button',    'txCode'=>'CUSTOM',                 'text'=>'微信调起按钮点击'],
+            64=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>72,    'bingCode'=>'other',                'txCode'=>'CONSULT_INTENTION',      'text'=>'聊到相关业务'],
+            65=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>73,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'回访-电话接通'],
+            66=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>74,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'回访-信息确认'],
+            67=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>76,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'回访-高潜成交'],
+            68=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>77,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'回访-成单客户'],
+            69=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>78,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'店铺停留'],
+            70=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>89,    'bingCode'=>'other',                'txCode'=>'FIRST_WITHDRAW',         'text'=>'放款'],
+            71=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>93,    'bingCode'=>'other',                'txCode'=>'PURCHASE',               'text'=>'付费阅读'],
+            72=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>94,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'进入书城并阅读'],
+            73=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>95,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'3日留存'],
+            74=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>96,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'4日留存'],
+            75=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>97,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'5日留存'],
+            76=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>98,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'6日留存'],
+            77=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>29,    'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'7日留存'],
+            78=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>100,   'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'14日留存'],
+            79=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>115,   'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'添加至桌面'],
+            80=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>117,   'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'进件'],
+            81=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>118,   'bingCode'=>'other',                'txCode'=>'CUSTOM',                 'text'=>'付费观剧'],
+            82=>['360Code'=>'PAY_SUCCESS',      'baiduCode'=>90,    'bingCode'=>'pay_success',          'txCode'=>'FINISH_PAY',             'text'=>'商品支付成功'],
+            83=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>119,   'bingCode'=>'subscribe',            'txCode'=>'CUSTOM',                 'text'=>'订阅(bing)'],
+            84=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>119,   'bingCode'=>'outbound_click',       'txCode'=>'CUSTOM',                 'text'=>'外链点击(bing)'],
+            85=>['360Code'=>'COUSTOMIZE',       'baiduCode'=>119,   'bingCode'=>'other',                'txCode'=>'SEARCH',                 'text'=>'搜索'],
+        ];
+        return $convertTypeTotal;
+    }
 }

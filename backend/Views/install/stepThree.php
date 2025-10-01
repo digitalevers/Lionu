@@ -12,7 +12,7 @@
 	<link rel='stylesheet' id='install-css'  href='/install_style/css/install.min.css' type='text/css' media='all' />
 	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
 	
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="/install_style/js/jquery-2.0.0.js"></script>
 </head>
 <body>
 

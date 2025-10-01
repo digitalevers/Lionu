@@ -71,4 +71,29 @@ class NeedloginController extends BaseController
 	    }
 	}
 
+	protected function switchBidType($bidType){
+	    switch ($bidType){
+	        case 0:
+	            return 'cpc';
+	        case 1:
+	            return 'oCPC';
+	        case 2:
+	            return 'cpm';
+	        case 3:
+	            return 'cpa';
+	        case 4:
+	            return 'maxClick';
+	        case 5:
+	            return '最大化转化';   //maxConvert
+	        case 6:
+	            return 'tcpa';
+	        case 7:
+	            return '手动CPM';
+	        case 8:
+	            return '增强cpc';
+	        default:
+	            return 'cpc';
+	    }
+	    
+	}
 }

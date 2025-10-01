@@ -231,7 +231,7 @@ class Validation implements ValidationInterface
 	 *
 	 * @return boolean
 	 */
-	protected function processRules(string $field = '', string $label = '', $value, $rules = [], array $data = []): bool
+	protected function processRules(string $field, string $label, $value, $rules = [], array $data = []): bool
 	{
 		// If the if_exist rule is defined...
 		if (in_array('if_exist', $rules))

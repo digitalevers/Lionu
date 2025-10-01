@@ -30,10 +30,10 @@ if (strpos(php_sapi_name(), 'cgi') === 0)
 }
 
 // Path to the front controller
-define('FCPATH', __DIR__ . '/public' . DIRECTORY_SEPARATOR);
+define('FCPATH', __DIR__ . '/public_backend' . DIRECTORY_SEPARATOR);
 
 // Load our paths config file
-require 'app/Config/Paths.php';
+require 'backend/Config/Paths.php';
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();

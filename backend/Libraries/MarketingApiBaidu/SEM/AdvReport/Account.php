@@ -1,0 +1,43 @@
+<?php
+namespace App\Libraries\MarketingApiBaidu\SEM\AdvReport;
+
+defined('FCPATH') OR exit('No direct script access allowed');
+
+/**
+ * 百度 Marketing api封装调用库
+ * @author Administrator
+ *
+ */
+class Account {
+    
+    /**
+     * 
+     * @param unknown $userName     广告用户名 (登录后右上角用户区)
+     * @param unknown $accessToken  应用Token (https://dev2.baidu.com/appmanage)
+     * @param string $startDate     查找数据起始日期
+     * @param string $endDate       查找数据结束日期
+     * @param string $type
+     * @return mixed
+     */
+    public function report($userName, $accessToken, $startDate = '', $endDate = '', $type = ''){
+        $filter_device = ($type == 'computer') ? 0 : 1;
+        $api = 'https://api.baidu.com/json/sms/service/OpenApiReportService/getReportData';
+        $bodyArr = [
+            'header'=>['accessToken'=>$accessToken, 'userName'=>$userName],
+            'body'=>[
+                'reportType'=>2208157,      //170026
+                'timeUnit'=>'DAY',
+                'startDate'=>$startDate,
+                'endDate'=>$endDate,
+                'filters'=>[["column"=>"device","operator"=>"EQ","values"=>["{$filter_device}"]]],
+                'columns'=>["date","userName","click","impression","cost","conversion","device"]
+            ]
+        ];
+        $body = json_encode($bodyArr);
+        $header = ['Content-Type: application/json;charset=utf-8'];
+        $res = requestPost($api, $body, $header);
+        $resArr = json_decode($res, true);
+        return $resArr;
+    }
+    
+}
