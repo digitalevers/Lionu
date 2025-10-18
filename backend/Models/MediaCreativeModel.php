@@ -416,7 +416,9 @@ class MediaCreativeModel extends \CodeIgniter\Model
         if(count($res['failures']) == 0){
             //修改成功 更新数据库
             $body = $this->_updateCreativeDecoDb($body);
-            $this->update($body['creative_id'], $body);
+            $mainkey_value = $body['creative_id'];
+            unset($body['creative_id']);
+            $this->update($mainkey_value, $body);
         }
         return $res;
     }
@@ -463,7 +465,9 @@ class MediaCreativeModel extends \CodeIgniter\Model
         if(count($res['header']['failures']) == 0){
             //修改成功 更新数据库
             $body = $this->_updateCreativeDecoDb($body);
-            $this->update($body['creative_id'], $body);
+            $mainkey_value = $body['creative_id'];
+            unset($body['creative_id']);
+            $this->update($mainkey_value, $body);
         }
         return $res;
     }
@@ -501,7 +505,10 @@ class MediaCreativeModel extends \CodeIgniter\Model
         if(isset($res['PartialErrors']) && count($res['PartialErrors']) == 0){
             //修改成功 更新数据库
             $body = $this->_updateCreativeDecoDb($body);
-            $updateRes = $this->update($body['creative_id'], $body);
+            $mainkey_value = $body['creative_id'];
+            unset($body['creative_id']);
+            $updateRes = $this->update($mainkey_value, $body);
+            //echo $this->db->getLastQuery();
         }
         return $res;
     }

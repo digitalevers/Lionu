@@ -586,7 +586,7 @@ class Semdev extends NeedloginController{
         //汇总整理数据
         if(count($oldReports) > 0){
             foreach ($oldReports as $account_id=>$v){
-                $oldReports[$account_id] = $this->_handleReport($v, 0);
+                $oldReports[$account_id] = $this->_handleReport($v);
             }
         }
         $newCreatives = array_reduce($creatives, function ($carry, $item) use ($accounts, $oldReports) {
