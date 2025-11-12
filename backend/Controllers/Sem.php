@@ -546,15 +546,15 @@ class Sem extends NeedloginController
      * 获取各渠道配置参数
      */
     public function getTotalConfig(){
-        if(trim($this->username) != 'admin'){
+        /* if(trim($this->username) != 'admin'){
             exit(json_encode([
                 'code' => 200,
                 'msg' => 'ok',
                 'data' => []
             ], JSON_UNESCAPED_UNICODE));
-        }
+        } */
         $db = \Config\Database::connect();
-        $conf = $db->query("SELECT `conf_key`,`conf_value` FROM `u_conf_sem` WHERE 1=1", [])->getResultArray();
+        $conf = $db->query("SELECT `conf_key`,`conf_value` FROM `u_conf_sem` WHERE uid=".intval($this->uid), [])->getResultArray();
         $conf = array_column($conf, null, 'conf_key');
         //dump($conf);
         $tabs = [
