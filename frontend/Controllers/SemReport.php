@@ -31,13 +31,16 @@ class SemReport extends BaseController
             exit();
         }
         $msclkid = $this->request->getGet('msclkid', 'trim|xss_clean|strip_tags', 'N');     //bing点击id
+        
         $qz_gdt = $this->request->getGet('qz_gdt', 'trim|xss_clean|strip_tags', '');       //非微信流量点击id
         $gdt_vid = $this->request->getGet('gdt_vid', 'trim|xss_clean|strip_tags', '');     //微信流量点击id
         
         $bd_vid = $this->request->getGet('bd_vid', 'trim|xss_clean|strip_tags', '');        //百度点击id
+        
         $qhclickid = $this->request->getGet('qhclickid', 'trim|xss_clean|strip_tags', '');  //360搜索广告点击id
         $sourceid = $this->request->getGet('sourceid', 'trim|xss_clean|strip_tags', '');      //360展示广告点击id
-        $convert = $this->request->getGet('convert', 'trim|xss_clean|strip_tags|intval', '');
+        
+        $convert = $this->request->getGet('convert', 'trim|xss_clean|strip_tags|intval', ''); //转化类型
         
         if(!empty($msclkid) && ($msclkid !== 'N')){
             //Bing ocpc上报
