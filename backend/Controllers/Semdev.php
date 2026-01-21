@@ -123,13 +123,25 @@ class Semdev extends NeedloginController{
     
     /**
      * 获取 Microsoft 应用授权URL
-     * TODO 动态获取回调地址 redirect_url
+     * TODO 动态获取回调地址 redirect_url 不使用前端testapi域名 直接使用后台域名
      * @param string $appId
      * @return string
      */
     private function getMicrosoftAuthorizeUrl($appId = '', $channelId = ''){
         $redirect_url = urlencode('https://testapi.digitalevers.com/SemAuth/bing?channelId='.$channelId);
         $authorizeUrl = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id='.$appId.'&response_type=code&redirect_uri='.$redirect_url.'&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fads.microsoft.com%2Fmsads.manage&state='.$appId;
+        return $authorizeUrl;
+    }
+    
+    /**
+     * 获取腾讯广告应用授权URL
+     * TODO 动态获取回调地址 redirect_url 不使用前端testapi域名 直接使用后台域名
+     * @param string $appId
+     * @return string
+     */
+    private function getTencentAuthorizeUrl($appId = '', $channelId = ''){
+        $redirect_url = urlencode('https://testapi.digitalevers.com/SemAuth/tencent?channelId='.$channelId);
+        $authorizeUrl = 'https://developers.e.qq.com/oauth/authorize?client_id='.$appId.'&redirect_uri='.$redirect_url.'&state='.$appId.'&account_type=ACCOUNT_TYPE_WECHAT';
         return $authorizeUrl;
     }
     
@@ -302,6 +314,59 @@ class Semdev extends NeedloginController{
             }
         } else {
             exit(json_encode(["code"=>$resArr['failures'][0]['code'],"msg"=>$resArr['failures'][0]['message']],JSON_UNESCAPED_UNICODE));
+        }
+    }
+    
+    /**
+     * 提交 Tencent 应用 Id
+     * 通过回调页面 OAuth2.0授权获取accessToken和refreshToken
+     */
+    public function authTencent(){
+        $uid = $this->uid;
+        $channelId = $this->request->getPost('channel_id', 'trim|intval', 0);           //渠道编号 由量U系统内部定义
+        $aid = $this->request->getPost('aid', 'trim|xss_clean|strip_tags', '');         //广告投放帐号ID 由量U系统内部定义
+        $appId = $this->request->getPost('appId', 'trim|xss_clean|strip_tags', '');     //广告应用appId 由渠道方定义 从渠道方获取
+
+        //验证时键名需要与POST键名保持一致
+        if (! $this->validate([
+            'channel_id' => ['required', 'greater_than[0]'],
+            'aid' => ['required'],
+            'appId' => ['required']
+        ])) {
+            //校验失败
+            exit(json_encode(['code' => 199,'msg' => 'fail'], JSON_UNESCAPED_UNICODE));
+        }
+        $db = \Config\Database::connect();
+        $sql = "SELECT COUNT(*) as _count FROM `dev_media_account` WHERE channel_id=? AND uid=?";
+        $values = [$channelId, $uid];
+        $count = $db->query($sql, $values)->getRowArray()['_count'];
+        if(intval($count) > 0){
+            exit(json_encode(['code' => 199,'msg' => '普通版只能添加一个帐号'], JSON_UNESCAPED_UNICODE));
+        }
+        
+        //新增bing帐户记录
+        $now = time();
+        $auth_time  = date('Y-m-d H:i:s', $now);
+        $sql = "INSERT INTO `dev_media_account`(app_id, devkey, devsecret, channel_id, channel_ename, channel_cname, auth_time, uid, media_account_id) VALUES(?,?,?,?,?,?,?,?,?)";
+        //$values = [$appId, $secret, $channelId, 'bing', '必应', $auth_time, $uid];
+        $values = [
+            'app_id'=>$appId,
+            'channel_id'=>$channelId,
+            'channel_ename'=>'tencent',
+            'channel_cname'=>'腾讯',
+            'auth_time'=>$auth_time,
+            'uid'=>$uid,
+            'media_account_id'=>$aid
+        ];
+        
+        $insertResult = $db->query($sql, array_values($values));
+        $newId = $insertResult->connID->insert_id;
+        if($newId > 0){
+            //组装redirectURL 并返送给前端
+            $url = $this->getTencentAuthorizeUrl($appId, $channelId);
+            _json(["code"=>200,"msg"=>"授权成功","data"=>["url"=>$url]]);
+        } else {
+            _json(["code"=>199,"msg"=>"保存失败"]);
         }
     }
     
