@@ -368,6 +368,9 @@ class Semdev extends NeedloginController{
         $insertResult = $db->query($sql, array_values($values));
         $newId = $insertResult->connID->insert_id;
         if($newId > 0){
+            $values['id'] = $newId;
+            //添加帐号成功后推入redis队列
+            $this->_pushAccountToRedis($values);
             //1.内部私有应用 直接在腾讯开发者后台 https://developers.e.qq.com/management_tools#/app 获取token
             _json(["code"=>200,"msg"=>"授权成功","data"=>[]]);
             //2.第三方应用使用oAuth2.0授权获取token
