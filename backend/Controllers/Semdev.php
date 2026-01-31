@@ -55,7 +55,7 @@ class Semdev extends NeedloginController{
         
         foreach ($res as $k=>$v){
             unset($v['password']);
-            unset($v['accessToken']);
+            //unset($v['accessToken']);
             $res[$channels[$k]['ename']][] = $v;
             unset($res[$k]);
         }
@@ -323,48 +323,57 @@ class Semdev extends NeedloginController{
      */
     public function authTencent(){
         $uid = $this->uid;
-        $channelId = $this->request->getPost('channel_id', 'trim|intval', 0);           //渠道编号 由量U系统内部定义
-        $aid = $this->request->getPost('aid', 'trim|xss_clean|strip_tags', '');         //广告投放帐号ID 由量U系统内部定义
-        $appId = $this->request->getPost('appId', 'trim|xss_clean|strip_tags', '');     //广告应用appId 由渠道方定义 从渠道方获取
+        $channelId = $this->request->getPost('channel_id', 'trim|intval', 0);                        //渠道编号 由量U系统内部定义
+        $aid = $this->request->getPost('aid', 'trim|xss_clean|strip_tags', '');                      //广告投放帐号ID 由腾讯广告定义
+        $appId = $this->request->getPost('appId', 'trim|xss_clean|strip_tags', '');                  //广告私有应用  appID 由腾讯广告开发者平台定义 https://developers.e.qq.com/management_tools#/app
+        $accessToken = $this->request->getPost('accessToken', 'trim|xss_clean|strip_tags', '');      //广告私有应用 accessToken 直接在腾讯广告开发者后台获取         https://developers.e.qq.com/docs/start#a4
+        $refreshToken = $this->request->getPost('refreshToken', 'trim|xss_clean|strip_tags', '');    //广告私有应用 refreshToken 直接在腾讯广告开发者后台获取     https://developers.e.qq.com/management_tools#/app
 
         //验证时键名需要与POST键名保持一致
         if (! $this->validate([
             'channel_id' => ['required', 'greater_than[0]'],
-            'aid' => ['required'],
-            'appId' => ['required']
+            //'aid' => ['required'],
+            'appId'=>['required'],
+            'accessToken' => ['required'],
+            'refreshToken' => ['required'],
         ])) {
             //校验失败
-            exit(json_encode(['code' => 199,'msg' => 'fail'], JSON_UNESCAPED_UNICODE));
+            exit(json_encode(['code' => 197,'msg' => 'fail'], JSON_UNESCAPED_UNICODE));
         }
         $db = \Config\Database::connect();
         $sql = "SELECT COUNT(*) as _count FROM `dev_media_account` WHERE channel_id=? AND uid=?";
         $values = [$channelId, $uid];
         $count = $db->query($sql, $values)->getRowArray()['_count'];
         if(intval($count) > 0){
-            exit(json_encode(['code' => 199,'msg' => '普通版只能添加一个帐号'], JSON_UNESCAPED_UNICODE));
+            exit(json_encode(['code' => 198,'msg' => '普通版只能添加一个帐号'], JSON_UNESCAPED_UNICODE));
         }
         
         //新增bing帐户记录
         $now = time();
         $auth_time  = date('Y-m-d H:i:s', $now);
-        $sql = "INSERT INTO `dev_media_account`(app_id, devkey, devsecret, channel_id, channel_ename, channel_cname, auth_time, uid, media_account_id) VALUES(?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO `dev_media_account`(app_id, channel_id, channel_ename, channel_cname, accessToken, refreshToken, auth_time, uid, media_account_id) VALUES(?,?,?,?,?,?,?,?,?)";
         //$values = [$appId, $secret, $channelId, 'bing', '必应', $auth_time, $uid];
         $values = [
-            'app_id'=>$appId,
+            'app_id'=>$appId,                          
             'channel_id'=>$channelId,
             'channel_ename'=>'tencent',
             'channel_cname'=>'腾讯',
+            'accessToken'=>$accessToken,
+            'refreshToken'=>$refreshToken,
             'auth_time'=>$auth_time,
             'uid'=>$uid,
-            'media_account_id'=>$aid
+            'media_account_id'=>0
         ];
         
         $insertResult = $db->query($sql, array_values($values));
         $newId = $insertResult->connID->insert_id;
         if($newId > 0){
+            //1.内部私有应用 直接在腾讯开发者后台 https://developers.e.qq.com/management_tools#/app 获取token
+            _json(["code"=>200,"msg"=>"授权成功","data"=>[]]);
+            //2.第三方应用使用oAuth2.0授权获取token
             //组装redirectURL 并返送给前端
-            $url = $this->getTencentAuthorizeUrl($appId, $channelId);
-            _json(["code"=>200,"msg"=>"授权成功","data"=>["url"=>$url]]);
+            //$url = $this->getTencentAuthorizeUrl($appId, $channelId);
+            //_json(["code"=>200,"msg"=>"授权成功","data"=>["url"=>$url]]);
         } else {
             _json(["code"=>199,"msg"=>"保存失败"]);
         }
