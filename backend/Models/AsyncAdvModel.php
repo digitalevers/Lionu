@@ -116,6 +116,9 @@ class AsyncAdvModel extends Model {
                     $oldCreativeReports = $creativeReportModel->getOldReports([$acc['id']=>$acc], $startDate, $endDate);
                     $creativeReportModel->getCreativeReportBing($acc, $startDate, $endDate, $oldCreativeReports, $oldCreatives[$acc['id']]);
                     break;
+                case 'tencent':
+                    
+                    break;
                 default:
                     break;
             }
