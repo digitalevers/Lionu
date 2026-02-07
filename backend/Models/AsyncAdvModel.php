@@ -117,6 +117,10 @@ class AsyncAdvModel extends Model {
                     $creativeReportModel->getCreativeReportBing($acc, $startDate, $endDate, $oldCreativeReports, $oldCreatives[$acc['id']]);
                     break;
                 case 'tencent':
+                    $startDate = date('Y-m-d',time() - 365 * 24 *3600); //Tencent支持查询最近一年(365天)内的数据
+                    //请求marketing api获取获取帐号基础数据和报表数据
+                    $acc = $accountModel->getAccountBaseTencent($acc);
+                    CLI::print(json_encode($acc));
                     
                     break;
                 default:

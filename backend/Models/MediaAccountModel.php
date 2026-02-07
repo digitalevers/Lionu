@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Libraries\MarketingApi360\Account as Account360;
 use App\Libraries\MarketingApiBaidu\Account as AccountBaidu;
 use App\Libraries\MarketingApiBing\Account as AccountBing;
+use App\Libraries\MarketingApiTencent\Account as AccountTencent;
 use CodeIgniter\CLI\CLI;
 
 class MediaAccountModel extends \CodeIgniter\Model
@@ -157,6 +158,16 @@ class MediaAccountModel extends \CodeIgniter\Model
         } while(false);
         
         return $account;
+    }
+    
+    public function getAccountBaseTencent($account){
+        do {
+            $accountTencent  = new AccountTencent();
+            $baseInfo = $accountTencent->getInfo($account['accessToken'], $account['media_account_id']);
+            
+        } while (false);
+        
+        return $baseInfo;
     }
     
     /**
